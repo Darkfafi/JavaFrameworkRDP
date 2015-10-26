@@ -1,6 +1,5 @@
 package gameEngine.ramses.gobalParts;
 
-import gameEngine.ramses.controlls.mouse.Mouse;
 import gameEngine.ramses.engine.EngineConstants;
 import gameEngine.ramses.events.Event;
 

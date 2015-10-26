@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -16,12 +15,8 @@ public class WavAudio {
 	//private static Map<String,AudioInputStream> _audioList = new HashMap<String,AudioInputStream>();
 	private static Map<String,AudioInputStream> _audioList = new HashMap<String,AudioInputStream>();
 	private static Map<String,AudioChannel> _audioChannelsList = new HashMap<String,AudioChannel>();
-	
-	private static Clip _audioPlayer;
 
 	public static void load() throws IOException, UnsupportedAudioFileException, LineUnavailableException{
-		
-		_audioPlayer = AudioSystem.getClip();
 		
 		createChannel("musicChannel");
 		
