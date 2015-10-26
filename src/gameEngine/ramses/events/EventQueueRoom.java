@@ -7,15 +7,6 @@ public class EventQueueRoom {
 	//static class die een add en resolved event functie heeft.
 	//als een event word geadd word er bij alle eventHandlers gekeken of het hun event is. Zo ja activeer het.
 	//private static ArrayList<Event> _allEvents = new ArrayList<Event>();
-	private static ArrayList<EventDispatcher> _allListeners = new ArrayList<EventDispatcher>();
-	
-	public static void addListeningObject(EventDispatcher object){
-		_allListeners.add(object);
-	}
-	
-	public static void removeListeningObject(EventDispatcher object){
-		_allListeners.remove(object);
-	}
 	
 	public static void addQueueItem(Event event,EventDispatcher dispatcher) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		ArrayList<ListenerItem> listListeners = dispatcher.getAllListeners();

@@ -1,6 +1,7 @@
 package gameEngine.ramses.gobalParts;
 
-import gameEngine.ramses.engine.EngineConstants;
+import gameEngine.ramses.controlls.keyboard.EventKeyboard;
+import gameEngine.ramses.engine.FrameworkConsts;
 import gameEngine.ramses.events.Event;
 
 import java.awt.Graphics2D;
@@ -35,14 +36,10 @@ public class GameScreen extends DisplayObject{
 	}
 	
 	public void secUpdate(){
-		dispatchEvent(new Event(EngineConstants.ENTER_SECOND,true));
+		dispatchEvent(new Event(FrameworkConsts.ENTER_SECOND,true));
 	}
 	
 	public void update(){
-		dispatchEvent(new Event(EngineConstants.ENTER_FRAME,true));
-	}
-	
-	private void testMethod(Event e){
-		System.out.println("lal");
+		dispatchEvent(new Event(FrameworkConsts.ENTER_FRAME,true));
 	}
 }

@@ -11,11 +11,10 @@ public abstract class EventDispatcher {
 	// een lijst van alle listeners die dit object heeft aangemaakt op andere objecten. (IDEE)
 	private ArrayList<ListenerItem> _allListeners = new ArrayList<ListenerItem>();
  	private EventDispatcher _parentListener = GameEngine.currentGameScreen();
-	
+ 	
 	public void addEventListener(String type, EventMethodData methodData){
 		
 		_allListeners.add(new ListenerItem(type, methodData));
-		EventQueueRoom.addListeningObject(this);
 	}
 	
 	public void dispatchEvent(Event event){
@@ -43,9 +42,6 @@ public abstract class EventDispatcher {
 					break;
 				}
 			}
-		}
-		if(_allListeners.size() < 0){
-			EventQueueRoom.removeListeningObject(this);
 		}
 	}
 	
@@ -84,9 +80,6 @@ public abstract class EventDispatcher {
 			for(int i = _allListeners.size() - 1; i >= 0; i--){
 				_allListeners.remove(_allListeners.get(i));
 			}
-		}
-		if(_allListeners.size() < 0){
-			EventQueueRoom.removeListeningObject(this);
 		}
 	}
 	

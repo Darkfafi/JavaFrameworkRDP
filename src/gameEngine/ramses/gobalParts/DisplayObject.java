@@ -2,7 +2,7 @@ package gameEngine.ramses.gobalParts;
 
 import gameEngine.ramses.collisionDetection.AxisProjection;
 import gameEngine.ramses.collisionDetection.SmartBoundingBox;
-import gameEngine.ramses.engine.EngineConstants;
+import gameEngine.ramses.engine.FrameworkConsts;
 import gameEngine.ramses.events.Event;
 import gameEngine.ramses.events.EventDispatcher;
 import gameEngine.ramses.mathUtils.Vector2D;
@@ -40,7 +40,7 @@ public class DisplayObject extends EventDispatcher{
 				addChild(displayObject);
 			}
 			displayObject.setParentListener(this);
-			displayObject.dispatchEvent(new Event(EngineConstants.ADDED_TO_STAGE,true));
+			displayObject.dispatchEvent(new Event(FrameworkConsts.ADDED_TO_STAGE,true));
 		}else{
 			System.err.println("Cannot add DisplayObject to itself and cannot add a Screen to a displayObject");
 		}
@@ -65,7 +65,7 @@ public class DisplayObject extends EventDispatcher{
 	
 	public void remove(){
 		if(parentObject != null){
-			dispatchEvent(new Event(EngineConstants.REMOVED_FROM_STAGE,true));
+			dispatchEvent(new Event(FrameworkConsts.REMOVED_FROM_STAGE,true));
 			parentObject.removeChild(this);
 		}
 	}

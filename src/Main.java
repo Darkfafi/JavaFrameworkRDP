@@ -1,19 +1,13 @@
 import gameEngine.ramses.assetsManagement.Assets;
 import gameEngine.ramses.audioManagment.WavAudio;
+import gameEngine.ramses.engine.FrameworkConsts;
 import gameEngine.ramses.engine.GameEngine;
-import gameEngine.ramses.events.Event;
 import gameEngine.ramses.gobalParts.GameScreen;
 import gameEngine.ramses.gobalParts.SpriteEntity;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.JFrame;
-
 
 public class Main {
-	
+	public static final String NAME = "GameFramework";
 	public static final int FRAME_RATE = 30;
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
@@ -21,21 +15,9 @@ public class Main {
 	private static GameScreen testScreen = new GameScreen(); // voorbeeld.
 	
 	public static void main(String[] args){
-		JFrame window = new JFrame("Games");
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
 		
-		Canvas canvas = new Canvas();
-		canvas.setPreferredSize(new Dimension(WIDTH,HEIGHT));
-		canvas.setBackground(Color.PINK);
 		
-		window.add(canvas);
-		
-		window.pack();
-		window.setLocationRelativeTo(null);
-		window.setVisible(true);
-		
-		GameEngine engine = new GameEngine(canvas,FRAME_RATE);
+		GameEngine engine = new GameEngine(NAME,WIDTH,HEIGHT,FRAME_RATE);
 		engine.start();
 		
 		engine.setScreen(testScreen); // voorbeeld.	
@@ -64,9 +46,9 @@ public class Main {
 		
 		//EventListener Tests
 		
-		testScreen.addEventListener("testEvent", testScreen.getEventMethodData("testMethod"));
-		sprtEntity.addEventListener("testEvent", testScreen.getEventMethodData("testMethod"));
-		sprtEntity.dispatchEvent(new Event("testEvent"));
+		//testScreen.addEventListener(FrameworkConsts.KEY_PRESSED, testScreen.getEventMethodData("testMethod"));
+		//sprtEntity.addEventListener("testEvent", testScreen.getEventMethodData("testMethod"));
+		//sprtEntity.dispatchEvent(new Event("testEvent"));
 		
 		
 		System.out.println(sprtEntity.hitTestObject(sprtEntity2));

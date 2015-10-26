@@ -2,13 +2,14 @@ package gameEngine.ramses.engine;
 
 import gameEngine.ramses.assetsManagement.Assets;
 import gameEngine.ramses.audioManagment.WavAudio;
+import gameEngine.ramses.controlls.keyboard.KeyboardManager;
 import gameEngine.ramses.controlls.mouse.MouseManager;
 import gameEngine.ramses.gobalParts.GameScreen;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -16,6 +17,7 @@ import java.io.IOException;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JFrame;
 
 
 public class GameEngine implements Runnable {
@@ -32,21 +34,18 @@ public class GameEngine implements Runnable {
 	private BufferedImage _image;
 	private int[] _pixels;
 	
+	private KeyboardManager _keyboardManager;
+	private MouseManager _mouseManager;
+	
 	private GameScreen _currentScreen;
 	private static GameScreen _currentGameScreen;
 	
-	//Test
-	
-	Image imageTest;
-	
-	public GameEngine(Canvas canvas,int frameRate){
+	public GameEngine(String nameWindow, int widthFrame, int heightFrame, int frameRate){
+		
+		setUpFrame(nameWindow,widthFrame,heightFrame);
 		
 		loadAssets();
 		loadAudio();
-		
-		MouseManager mouseManager = new MouseManager();
-		
-		_canvas = canvas;
 		
 		currentFrameRate = frameRate;
 		
@@ -54,9 +53,32 @@ public class GameEngine implements Runnable {
 		_pixels = ((DataBufferInt) _image.getRaster().getDataBuffer()).getData();
 		
 		_setFrameRate = frameRate;
-		
-		//imageTest = Assets.getImage("Test"); // Test
 	}
+	
+	private void setUpFrame(String nameWindow, int widthFrame, int heightFrame){
+		
+		JFrame window = new JFrame(nameWindow);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setResizable(false);
+		
+		_canvas = new Canvas();
+		_canvas.setPreferredSize(new Dimension(widthFrame,heightFrame));
+		_canvas.setBackground(Color.PINK);
+		
+		_keyboardManager = new KeyboardManager();
+		_mouseManager = new MouseManager();
+				
+		window.addKeyListener(_keyboardManager);
+		_canvas.addMouseListener(_mouseManager);
+		_canvas.addMouseMotionListener(_mouseManager);
+		
+		window.add(_canvas);
+		
+		window.pack();
+		window.setLocationRelativeTo(null);
+		window.setVisible(true);
+	}
+	
 	
 	private void loadAudio(){
 		try {
@@ -178,6 +200,9 @@ public class GameEngine implements Runnable {
 	public void setScreen(GameScreen screen){
 		_currentScreen = screen;
 		_currentGameScreen = _currentScreen;
+		
+		_keyboardManager.setParentListener(_currentScreen);
+		_mouseManager.setParentListener(_currentScreen);
 	}
 	public GameScreen getScreen(GameScreen screen){
 		return _currentScreen;
