@@ -18,6 +18,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public abstract class Assets {
+
 	
 	
 	private static Map<String,Image> _imageList = new HashMap<String, Image>();

@@ -8,7 +8,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 
 public class GameScreen extends DisplayObject{
-	
 	private Graphics2D _g;
 	
 	public void drawSprite(Image spriteToDraw,int x,int y,int width,int height, double rotation){

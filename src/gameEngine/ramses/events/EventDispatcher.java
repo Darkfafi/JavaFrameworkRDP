@@ -10,6 +10,7 @@ public abstract class EventDispatcher {
 	
 	// een lijst van alle listeners die dit object heeft aangemaakt op andere objecten. (IDEE)
 	private ArrayList<ListenerItem> _allListeners = new ArrayList<ListenerItem>();
+	
  	private EventDispatcher _parentListener = GameEngine.getCoreListener();
  	
 	public void addEventListener(String type, EventMethodData methodData){

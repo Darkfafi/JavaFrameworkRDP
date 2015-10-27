@@ -45,7 +45,6 @@ public class Main {
 	//	WavAudio.stopAudio("Test2");
 		
 		//EventListener Tests
-		
 		GameEngine.getCoreListener().addEventListener(FrameworkConsts.KEY_PRESSED, testScreen.getEventMethodData("testMethod"));
 		//sprtEntity.addEventListener("testEvent", testScreen.getEventMethodData("testMethod"));
 		//sprtEntity.dispatchEvent(new Event("testEvent"));

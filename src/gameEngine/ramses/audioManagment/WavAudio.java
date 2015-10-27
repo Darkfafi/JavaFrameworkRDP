@@ -9,7 +9,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-
 public abstract class WavAudio {
 	
 	//private static Map<String,AudioInputStream> _audioList = new HashMap<String,AudioInputStream>();
