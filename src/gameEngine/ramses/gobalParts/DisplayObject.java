@@ -150,15 +150,14 @@ public class DisplayObject extends EventDispatcher{
 	
 	public Vector2D getWorldPosition(){
 		Vector2D worldPosVec = new Vector2D(x,y);
-		
-		
 	
 		if(parentObject != null){
-			worldPosVec.setAngle(worldPosVec.getAngle() + Math.toRadians(getWorldRotation()));
-			worldPosVec.add(parentObject.getWorldPosition());
+			Vector2D parentCalcVec = new Vector2D(x, y);
+			parentCalcVec.setAngle(parentCalcVec.getAngle() + Math.toRadians(parentObject.getWorldRotation()));
+			worldPosVec = parentObject.getWorldPosition().clone();
+			worldPosVec.add(parentCalcVec);
+			System.out.println(parentObject + " " + worldPosVec);		
 		}
-		
-		
 		
 		return worldPosVec;
 	}

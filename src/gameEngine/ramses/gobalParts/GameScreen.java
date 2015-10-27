@@ -10,10 +10,10 @@ import java.awt.Image;
 public class GameScreen extends DisplayObject{
 	private Graphics2D _g;
 	
-	public void drawSprite(Image spriteToDraw,int x,int y,int width,int height, double rotation){
-		_g.rotate(Math.toRadians(rotation), x + spriteToDraw.getWidth(null) / 2, y + spriteToDraw.getHeight(null) / 2);
+	public void drawSprite(Image spriteToDraw,int x,int y,int width,int height, double rotation,int pivotX, int pivotY){
+		_g.rotate(Math.toRadians(rotation), x + pivotX, y + pivotY);
 		_g.drawImage(spriteToDraw, x, y,width,height, null);
-		_g.rotate(Math.toRadians(-rotation),x + spriteToDraw.getWidth(null) / 2, y + spriteToDraw.getHeight(null) / 2);
+		_g.rotate(Math.toRadians(-rotation),x + pivotX, y + pivotY);
 		
 	}
 	

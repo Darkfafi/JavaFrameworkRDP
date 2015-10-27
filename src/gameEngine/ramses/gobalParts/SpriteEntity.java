@@ -8,17 +8,26 @@ public class SpriteEntity extends DisplayObject{
 	protected Image _sprite;
 	
 	public void renderObject(GameScreen gameScreen, int xStart, int yStart,float xScaleStart, float yScaleStart,double startRotation){
+		
+		int pivotPositionX = (int)(-getPivotX() * getWidth(false));
+		int pivotPositionY = (int)(-getPivotY() *  getHeight(false));
+		int xPosStart = this.getWorldPositionX() + pivotPositionX;
+		int yPosStart = this.getWorldPositionY() + pivotPositionY;
+		int widthDraw = (int)(_sprite.getWidth(null) * (xScaleStart * scaleX));
+		int heightDraw = (int)(_sprite.getHeight(null) * (yScaleStart * scaleY));
+		double rotationDrawing = startRotation + rotation;
+		
 		if(_sprite != null){
 			//gameScreen.drawSprite(_sprite, xStart + x +(int)(-getPivotX() * getWidth(false)), yStart + y +(int)(-getPivotY() *  getHeight(false)), (int)(_sprite.getWidth(null) * (xScaleStart * scaleX)), (int)(_sprite.getHeight(null) * (yScaleStart * scaleY)),startRotation + rotation);
-			gameScreen.drawSprite(_sprite, this.getWorldPositionX() +(int)(-getPivotX() * getWidth(false)), this.getWorldPositionY() +(int)(-getPivotY() *  getHeight(false)), (int)(_sprite.getWidth(null) * (xScaleStart * scaleX)), (int)(_sprite.getHeight(null) * (yScaleStart * scaleY)), this.getWorldRotation());
+			//gameScreen.drawSprite(_sprite, this.getWorldPositionX() +(int)(-getPivotX() * getWidth(false)), this.getWorldPositionY() +(int)(-getPivotY() *  getHeight(false)), (int)(_sprite.getWidth(null) * (xScaleStart * scaleX)), (int)(_sprite.getHeight(null) * (yScaleStart * scaleY)), this.getWorldRotation());
+			gameScreen.drawSprite(_sprite, xPosStart, yPosStart, widthDraw, heightDraw, rotationDrawing,pivotPositionX,pivotPositionY);
 		}
 		
 		int l = childerenObjects.size();
-		
 		for(int i = l - 1; i >= 0; i--){
 			if(childerenObjects.get(i) instanceof SpriteEntity){
 				SpriteEntity sprEntity = (SpriteEntity) childerenObjects.get(i);
-				sprEntity.renderObject(gameScreen, x +(int)(-getPivotX() * getWidth(false)), y +(int)(-getPivotY() *  getHeight(false)),scaleX,scaleY,rotation);
+				sprEntity.renderObject(gameScreen, xPosStart, yPosStart,scaleX,scaleY,rotation);
 			}
 		}
 	}
