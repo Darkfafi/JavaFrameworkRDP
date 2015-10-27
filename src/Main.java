@@ -31,7 +31,7 @@ public class Main {
 		testScreen.addChild(sprtEntity);
 		sprtEntity.x = WIDTH  / 2;
 		sprtEntity.y = 300;
-		testScreen.addChild(sprtEntity2);
+		sprtEntity.addChild(sprtEntity2);
 		sprtEntity2.x = sprtEntity2.getWidth();
 		sprtEntity2.y = 0;
 		

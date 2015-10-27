@@ -151,9 +151,10 @@ public class DisplayObject extends EventDispatcher{
 	public Vector2D getWorldPosition(){
 		Vector2D worldPosVec = new Vector2D(x,y);
 		
-		worldPosVec.setAngle(worldPosVec.getAngle() + Math.toRadians(getWorldRotation()));
+		
 	
 		if(parentObject != null){
+			worldPosVec.setAngle(worldPosVec.getAngle() + Math.toRadians(getWorldRotation()));
 			worldPosVec.add(parentObject.getWorldPosition());
 		}
 		
