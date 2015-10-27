@@ -24,7 +24,7 @@ public class SmartBoundingBox {
 		_corners[3] = _downL;
 		
 		for(int i = 0; i < 4; i++){
-			_corners[i].setAngle(Math.toRadians(Math.toDegrees(_corners[i].getAngle()) + object.rotation));
+			_corners[i].setAngle(Math.toRadians(Math.toDegrees(_corners[i].getAngle()) + object.getWorldRotation()));
 			_corners[i].setX(_corners[i].getX() + object.getWorldPositionX());
 			_corners[i].setY(_corners[i].getY() + object.getWorldPositionY());
 		}

@@ -129,23 +129,47 @@ public class DisplayObject extends EventDispatcher{
 	
 	public int getWorldPositionX(){
 		
-		int xPos = x;
-		
+		int xPos = (int) getWorldPosition().getX();
+		/*
 		if(parentObject != null){
 			xPos += parentObject.getWorldPositionX();
-		}
+		}*/
 		
 		return xPos;
 	}
 	public int getWorldPositionY(){
 		
-		int yPos = y;
-		
+		int yPos = (int) getWorldPosition().getY();
+		/*
 		if(parentObject != null){
 			yPos += parentObject.getWorldPositionY();
-		}
+		}*/
 		
 		return yPos;
+	}
+	
+	public Vector2D getWorldPosition(){
+		Vector2D worldPosVec = new Vector2D(x,y);
+		
+		worldPosVec.setAngle(worldPosVec.getAngle() + Math.toRadians(getWorldRotation()));
+	
+		if(parentObject != null){
+			worldPosVec.add(parentObject.getWorldPosition());
+		}
+		
+		
+		
+		return worldPosVec;
+	}
+	
+	public double getWorldRotation(){
+		double rotationObj = rotation;
+		
+		if(parentObject != null){
+			rotationObj += parentObject.getWorldRotation();
+		}
+		
+		return rotationObj;
 	}
 	
 	public int getWidth(){

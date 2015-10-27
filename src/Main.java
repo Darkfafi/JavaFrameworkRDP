@@ -29,14 +29,14 @@ public class Main {
 		sprtEntity.setSprite(Assets.getImage("Test"));
 		sprtEntity2.setSprite(Assets.getImage("Test"));
 		testScreen.addChild(sprtEntity);
-		sprtEntity.x = sprtEntity.getWidth() / 2;
+		sprtEntity.x = WIDTH  / 2;
 		sprtEntity.y = 300;
-		sprtEntity.addChild(sprtEntity2);
-		sprtEntity2.x = sprtEntity.x + sprtEntity.getHeight() + 1;
-		sprtEntity2.scaleX = 1f;
+		testScreen.addChild(sprtEntity2);
+		sprtEntity2.x = sprtEntity2.getWidth();
+		sprtEntity2.y = 0;
 		
-		sprtEntity.rotation = 92;
-		sprtEntity2.rotation = 90;
+		sprtEntity.rotation = 0;
+		sprtEntity2.rotation = 0;
 		
 		WavAudio.setChannelVolume("musicChannel", 50);
 		//WavAudio.playAudio("musicChannel","Test",50,1);
