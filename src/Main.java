@@ -26,19 +26,23 @@ public class Main {
 		// voorbeeld.
 		SpriteEntity sprtEntity = new SpriteEntity();
 		SpriteEntity sprtEntity2 = new SpriteEntity();
+		SpriteEntity sprtEntity3 = new SpriteEntity();
 		sprtEntity.setSprite(Assets.getImage("Test"));
 		sprtEntity2.setSprite(Assets.getImage("Test"));
+		sprtEntity3.setSprite(Assets.getImage("Test"));
 		testScreen.addChild(sprtEntity);
 		sprtEntity.x = 400;
 		sprtEntity.y = 300;
 		sprtEntity.addChild(sprtEntity2);
-		sprtEntity2.x = (sprtEntity.getWidth() + sprtEntity.getWidth() / 2) - 1;
+		sprtEntity2.addChild(sprtEntity3);
+		sprtEntity2.x = (sprtEntity.getWidth());
 		sprtEntity2.y = 0;
+		sprtEntity3.x = (sprtEntity.getWidth()  + 1);
 		
-		sprtEntity.setPivotPoint(0, 0.5f);
+		//sprtEntity.setPivotPoint(0, 0.5f);
 		
-		sprtEntity.rotation = 45;
-		sprtEntity2.rotation = 0;
+		sprtEntity.rotation = 0;
+		sprtEntity2.rotation = 20;
 		
 		WavAudio.setChannelVolume("musicChannel", 50);
 		//WavAudio.playAudio("musicChannel","Test",50,1);

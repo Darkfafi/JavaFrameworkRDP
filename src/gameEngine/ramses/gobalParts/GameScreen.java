@@ -25,7 +25,7 @@ public class GameScreen extends DisplayObject{
 		for(int i = l - 1; i >= 0; i--){
 			if(childerenObjects.get(i) instanceof SpriteEntity){
 				SpriteEntity sprEntity = (SpriteEntity)childerenObjects.get(i);
-				sprEntity.renderObject(this, 0, 0,1,1,0);
+				sprEntity.renderObject(this, 0, 0,1,1);
 			}
 		}
 	}
