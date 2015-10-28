@@ -32,12 +32,12 @@ public class Main {
 		sprtEntity.x = 400;
 		sprtEntity.y = 300;
 		sprtEntity.addChild(sprtEntity2);
-		sprtEntity2.x = sprtEntity.getWidth() + sprtEntity2.getWidth() / 2;
+		sprtEntity2.x = (sprtEntity.getWidth() + sprtEntity.getWidth() / 2) - 1;
 		sprtEntity2.y = 0;
 		
 		sprtEntity.setPivotPoint(0, 0.5f);
 		
-		sprtEntity.rotation = 20;
+		sprtEntity.rotation = 45;
 		sprtEntity2.rotation = 0;
 		
 		WavAudio.setChannelVolume("musicChannel", 50);

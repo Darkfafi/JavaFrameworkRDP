@@ -9,10 +9,10 @@ public class SpriteEntity extends DisplayObject{
 	
 	public void renderObject(GameScreen gameScreen, int xStart, int yStart,float xScaleStart, float yScaleStart,double startRotation){
 		
-		int pivotPositionX = (int)(-getPivotX() * getWidth(false));
-		int pivotPositionY = (int)(-getPivotY() *  getHeight(false));
-		int xPosStart = this.getWorldPositionX() + pivotPositionX;
-		int yPosStart = this.getWorldPositionY() + pivotPositionY;
+		int pivotPositionRevX = (int)(-getPivotX() * getWidth(false));
+		int pivotPositionRevY = (int)(-getPivotY() *  getHeight(false));
+		int xPosStart = this.getWorldPositionX() + pivotPositionRevX;
+		int yPosStart = this.getWorldPositionY() + pivotPositionRevY;
 		int widthDraw = (int)(_sprite.getWidth(null) * (xScaleStart * scaleX));
 		int heightDraw = (int)(_sprite.getHeight(null) * (yScaleStart * scaleY));
 		double rotationDrawing = startRotation + rotation;
@@ -20,7 +20,7 @@ public class SpriteEntity extends DisplayObject{
 		if(_sprite != null){
 			//gameScreen.drawSprite(_sprite, xStart + x +(int)(-getPivotX() * getWidth(false)), yStart + y +(int)(-getPivotY() *  getHeight(false)), (int)(_sprite.getWidth(null) * (xScaleStart * scaleX)), (int)(_sprite.getHeight(null) * (yScaleStart * scaleY)),startRotation + rotation);
 			//gameScreen.drawSprite(_sprite, this.getWorldPositionX() +(int)(-getPivotX() * getWidth(false)), this.getWorldPositionY() +(int)(-getPivotY() *  getHeight(false)), (int)(_sprite.getWidth(null) * (xScaleStart * scaleX)), (int)(_sprite.getHeight(null) * (yScaleStart * scaleY)), this.getWorldRotation());
-			gameScreen.drawSprite(_sprite, xPosStart, yPosStart, widthDraw, heightDraw, rotationDrawing,pivotPositionX,pivotPositionY);
+			gameScreen.drawSprite(_sprite, xPosStart, yPosStart, widthDraw, heightDraw, rotationDrawing,-pivotPositionRevX,-pivotPositionRevY);
 		}
 		
 		int l = childerenObjects.size();
