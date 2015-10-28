@@ -83,6 +83,13 @@ public class DisplayObject extends EventDispatcher{
 	}
 	
 	public boolean hitTestObject(DisplayObject other){
+		return hitTestObject(other,true);
+	}
+	
+	public boolean hitTestObject(DisplayObject other,boolean checkChilderen){
+		
+		boolean result = true;
+		
 		Vector2D[] allAxis = new Vector2D[4];
 		AxisProjection thisProj;
 		AxisProjection otherProj;
@@ -102,11 +109,20 @@ public class DisplayObject extends EventDispatcher{
 	            // ... and check whether the outermost projected points of both OBBs overlap.
 	            // If this is not the case, the Seperating Axis Theorem states that there can be no collision between the rectangles
 	        if (!((otherProj.getMin()<=thisProj.getMax())&&(otherProj.getMax()>=thisProj.getMin()))){
-	            return false;
+	        	result = false;
+	        	break;
 	        }
 		}
+		if(!result && childerenObjects.size() > 0){
+			for(int i = childerenObjects.size() - 1; i >= 0; i--){
+				result = childerenObjects.get(i).hitTestObject(other);
+				if(result){
+					break;
+				}
+			}
+		}
 		
-		return true;
+		return result;
 	}
 	
 	// Getters and Setters

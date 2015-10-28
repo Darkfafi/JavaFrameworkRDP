@@ -2,8 +2,8 @@ import gameEngine.ramses.assetsManagement.Assets;
 import gameEngine.ramses.audioManagment.WavAudio;
 import gameEngine.ramses.engine.FrameworkConsts;
 import gameEngine.ramses.engine.GameEngine;
+import gameEngine.ramses.gobalParts.AnimEntity;
 import gameEngine.ramses.gobalParts.GameScreen;
-import gameEngine.ramses.gobalParts.SpriteEntity;
 
 
 public class Main {
@@ -24,26 +24,27 @@ public class Main {
 		
 		
 		// voorbeeld.
-		SpriteEntity sprtEntity = new SpriteEntity();
-		SpriteEntity sprtEntity2 = new SpriteEntity();
-		SpriteEntity sprtEntity3 = new SpriteEntity();
-		sprtEntity.setSprite(Assets.getImage("Test"));
-		sprtEntity2.setSprite(Assets.getImage("Test"));
-		sprtEntity3.setSprite(Assets.getImage("Test"));
+		AnimEntity sprtEntity = new AnimEntity();
+		AnimEntity sprtEntity2 = new AnimEntity();
+		AnimEntity sprtEntity3 = new AnimEntity();
+		sprtEntity.setAnimationSheet(Assets.getSpriteSheet("Test2"));
+		sprtEntity2.setAnimationSheet(Assets.getSpriteSheet("Test2"));
+		sprtEntity3.setAnimationSheet(Assets.getSpriteSheet("Test2"));
 		testScreen.addChild(sprtEntity);
-		sprtEntity.x = 400;
-		sprtEntity.y = 300;
-		sprtEntity.addChild(sprtEntity2);
-		sprtEntity2.addChild(sprtEntity3);
+		sprtEntity.x = 0;
+		sprtEntity.y = 600;
+		testScreen.addChild(sprtEntity2);
+		sprtEntity.addChild(sprtEntity3);
 		sprtEntity2.x = (sprtEntity.getWidth());
 		sprtEntity2.y = 0;
+		sprtEntity2.scaleX = 0.5f;
 		sprtEntity3.x = (sprtEntity.getWidth()  + 1);
-		
+		sprtEntity3.y = -600;	
 		//sprtEntity.setPivotPoint(0, 0.5f);
 		
 		sprtEntity.rotation = 0;
-		sprtEntity2.rotation = 20;
-		
+		sprtEntity2.rotation = 45;
+		sprtEntity3.rotation = 90;
 		WavAudio.setChannelVolume("musicChannel", 50);
 		//WavAudio.playAudio("musicChannel","Test",50,1);
 		WavAudio.playAudio("musicChannel","Test2",50);
