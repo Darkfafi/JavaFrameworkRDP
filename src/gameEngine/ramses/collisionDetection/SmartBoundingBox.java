@@ -1,7 +1,7 @@
 package gameEngine.ramses.collisionDetection;
 
 import gameEngine.ramses.gobalParts.DisplayObject;
-import gameEngine.ramses.mathUtils.Vector2D;
+import gameEngine.ramses.utils.math.Vector2D;
 
 public class SmartBoundingBox {
 	

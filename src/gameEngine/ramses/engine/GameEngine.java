@@ -137,7 +137,6 @@ public class GameEngine implements Runnable {
 		while(_running){
 			
 			now = System.nanoTime();
-			
 			delta += (now - lastTime) / nsPerTick;
 			lastTime = now;
 			
@@ -155,16 +154,15 @@ public class GameEngine implements Runnable {
 			
 			frames ++;
 			render();
+
+			//this if statement is for debugging (Will run every second).
 			
-			//this if statement is for debugging.
 			if(System.currentTimeMillis() - lastTimer > 1000){
 				lastTimer = System.currentTimeMillis();
 				//System.out.println(ticks + " , " + frames);
-				
 				if(_currentScreen != null){
 					_currentScreen.secUpdate();
 				}
-				
 				currentFrameRate = ticks;
 				ticks = 0;
 				frames = 0;

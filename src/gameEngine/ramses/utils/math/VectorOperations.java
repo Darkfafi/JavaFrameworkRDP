@@ -1,4 +1,5 @@
-package gameEngine.ramses.mathUtils;
+package gameEngine.ramses.utils.math;
+
 
 public class VectorOperations {
 	

@@ -133,7 +133,7 @@ public class AnimEntity extends SpriteEntity{
 	private void correctRunTimer(){
 		_animTimer.schedule(new TimerTask(){
 			@Override
-			public void run() {	
+			public void run() {
 				nextFrame();
 		}}, 1000/(int)(GameEngine.getCurrentFrameRate() * animationSpeed));
 	}

@@ -5,7 +5,7 @@ import gameEngine.ramses.collisionDetection.SmartBoundingBox;
 import gameEngine.ramses.engine.FrameworkConsts;
 import gameEngine.ramses.events.Event;
 import gameEngine.ramses.events.EventDispatcher;
-import gameEngine.ramses.mathUtils.Vector2D;
+import gameEngine.ramses.utils.math.Vector2D;
 
 import java.util.ArrayList;
 

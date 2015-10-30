@@ -4,6 +4,7 @@ import gameEngine.ramses.engine.FrameworkConsts;
 import gameEngine.ramses.engine.GameEngine;
 import gameEngine.ramses.gobalParts.AnimEntity;
 import gameEngine.ramses.gobalParts.GameScreen;
+import gameEngine.ramses.utils.Timer;
 
 
 public class Main {
@@ -22,7 +23,6 @@ public class Main {
 		
 		engine.setScreen(testScreen); // voorbeeld.	
 		
-		
 		// voorbeeld.
 		AnimEntity sprtEntity = new AnimEntity();
 		AnimEntity sprtEntity2 = new AnimEntity();
@@ -31,16 +31,19 @@ public class Main {
 		sprtEntity2.setAnimationSheet(Assets.getSpriteSheet("Test2"));
 		sprtEntity3.setAnimationSheet(Assets.getSpriteSheet("Test2"));
 		testScreen.addChild(sprtEntity);
-		sprtEntity.x = 0;
-		sprtEntity.y = 600;
+		sprtEntity.x = 400;
+		sprtEntity.y = 300;
 		testScreen.addChild(sprtEntity2);
 		sprtEntity.addChild(sprtEntity3);
 		sprtEntity2.x = (sprtEntity.getWidth());
 		sprtEntity2.y = 0;
-		sprtEntity2.scaleX = 0.5f;
+		//sprtEntity2.scaleX = 0.5f;
 		sprtEntity3.x = (sprtEntity.getWidth()  + 1);
-		sprtEntity3.y = -600;	
+		sprtEntity3.y = 300;	
 		//sprtEntity.setPivotPoint(0, 0.5f);
+		
+		Timer timer = new Timer();
+		timer.start(5, 100);
 		
 		sprtEntity.rotation = 0;
 		sprtEntity2.rotation = 45;
@@ -57,6 +60,6 @@ public class Main {
 		//sprtEntity.dispatchEvent(new Event("testEvent"));
 		
 		
-		System.out.println(sprtEntity.hitTestObject(sprtEntity2));
+		//System.out.println(sprtEntity.hitTestObject(sprtEntity3));
 	}
 }
