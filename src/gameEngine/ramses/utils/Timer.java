@@ -7,10 +7,12 @@ import gameEngine.ramses.events.EventDispatcher;
 
 public class Timer extends EventDispatcher{
 	
-	public static final String TIMER_ENDED = "timerEndedEvent";
-	public static final String TIMER_TIK = "timerTikEvent";
-	public static final String TIMER_REPEAT = "timerRepeatEvent";
-	
+	//PUBLIC FINALS
+	public static final String TIMER_ON_END = "timerEndedEvent";
+	public static final String TIMER_ON_TIK = "timerTikEvent";
+	public static final String TIMER_ON_REPEAT = "timerRepeatedEvent";
+	public static final String TIMER_ON_RESUME = "timerRepeatedEvent";
+	public static final String TIMER_ON_PAUSE = "timerRepeatedEvent";
 	
 	private boolean _running = false;
 	private boolean _paused = false;
@@ -22,19 +24,26 @@ public class Timer extends EventDispatcher{
 	private int _timesRepeated = 0;
 	
 	public void start(float timeInSeconds, int timesToRepeat){
-		if(_timeGivenInSeconds != 0){
-			stop();
+		if(timeInSeconds > 0 && timesToRepeat >= 0){
+			if(_timeGivenInSeconds != 0){
+				stop();
+			}
+			GameEngine.getCoreListener().addEventListener(FrameworkConsts.ENTER_FRAME, getEventMethodData("tik"));
+			_timeGivenInSeconds = timeInSeconds;
+			_givenRepeatAmount = timesToRepeat;
+			_running = true;
+		}else{
+			System.err.println("ERROR: Timer can not be given a negative value or a zero time value to execute");
 		}
-		GameEngine.getCoreListener().addEventListener(FrameworkConsts.ENTER_FRAME, getEventMethodData("tik"));
-		_timeGivenInSeconds = timeInSeconds;
-		_givenRepeatAmount = timesToRepeat;
-		_running = true;
 	}
 	public void stop(){
-		GameEngine.getCoreListener().removeEventListener(FrameworkConsts.ENTER_FRAME, getEventMethodData("tik"));
-		_timePassedInSec = 0;
-		_running = false;
-		_paused = false;
+		if(_timeGivenInSeconds != 0){
+			GameEngine.getCoreListener().removeEventListener(FrameworkConsts.ENTER_FRAME, getEventMethodData("tik"));
+			_timesRepeated = 0;
+			_timePassedInSec = 0;
+			_running = false;
+			_paused = false;
+		}
 	}
 	public void pause(){
 		_paused = true;
@@ -55,16 +64,15 @@ public class Timer extends EventDispatcher{
 	private void tik(Event e){
 		if(_running){
 			_timePassedInSec += GameEngine.getDeltaTime();
-			//System.out.println(_timePassedInSec);
 			if(_timePassedInSec >= _timeGivenInSeconds){
-				this.dispatchEvent(new Event(TIMER_TIK));
+				this.dispatchEvent(new Event(TIMER_ON_TIK));
 				if(_timesRepeated <_givenRepeatAmount){
 					_timePassedInSec = 0;
 					_timesRepeated ++;
-					this.dispatchEvent(new Event(TIMER_REPEAT));
+					this.dispatchEvent(new Event(TIMER_ON_REPEAT));
 				}else{
 					stop();
-					this.dispatchEvent(new Event(TIMER_ENDED));
+					this.dispatchEvent(new Event(TIMER_ON_END));
 				}
 			}
 		}
