@@ -4,7 +4,6 @@ import gameEngine.ramses.engine.FrameworkConsts;
 import gameEngine.ramses.engine.GameEngine;
 import gameEngine.ramses.gobalParts.AnimEntity;
 import gameEngine.ramses.gobalParts.GameScreen;
-import gameEngine.ramses.utils.Timer;
 
 
 public class Main {
@@ -31,6 +30,7 @@ public class Main {
 		sprtEntity2.setAnimationSheet(Assets.getSpriteSheet("Test2"));
 		sprtEntity3.setAnimationSheet(Assets.getSpriteSheet("Test2"));
 		testScreen.addChild(sprtEntity);
+		
 		sprtEntity.x = 400;
 		sprtEntity.y = 300;
 		testScreen.addChild(sprtEntity2);
@@ -42,8 +42,8 @@ public class Main {
 		sprtEntity3.y = 300;	
 		//sprtEntity.setPivotPoint(0, 0.5f);
 		
-		Timer timer = new Timer();
-		timer.start(5, 100);
+		//Timer timer = new Timer();
+		//timer.start(5, 100);
 		
 		sprtEntity.rotation = 0;
 		sprtEntity2.rotation = 45;
@@ -55,7 +55,7 @@ public class Main {
 	//	WavAudio.stopAudio("Test2");
 		
 		//EventListener Tests
-		GameEngine.getCoreListener().addEventListener(FrameworkConsts.KEY_PRESSED, testScreen.getEventMethodData("testMethod"));
+		//GameEngine.getCoreListener().addEventListener(FrameworkConsts.KEY_PRESSED, testScreen.getEventMethodData("testMethod"));
 		//sprtEntity.addEventListener("testEvent", testScreen.getEventMethodData("testMethod"));
 		//sprtEntity.dispatchEvent(new Event("testEvent"));
 		

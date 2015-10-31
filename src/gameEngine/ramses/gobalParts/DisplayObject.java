@@ -3,6 +3,7 @@ package gameEngine.ramses.gobalParts;
 import gameEngine.ramses.collisionDetection.AxisProjection;
 import gameEngine.ramses.collisionDetection.SmartBoundingBox;
 import gameEngine.ramses.engine.FrameworkConsts;
+import gameEngine.ramses.engine.GameEngine;
 import gameEngine.ramses.events.Event;
 import gameEngine.ramses.events.EventDispatcher;
 import gameEngine.ramses.utils.math.Vector2D;
@@ -56,6 +57,7 @@ public class DisplayObject extends EventDispatcher{
 		
 		int index = childerenObjects.indexOf(displayObject);
 		if(index != -1){
+			displayObject.parentObject = null;
 			childerenObjects.remove(index);
 		}else{
 			System.err.println("DisplayObject does not contain object: " + displayObject.toString());
@@ -210,5 +212,9 @@ public class DisplayObject extends EventDispatcher{
 			heightR = Math.abs(heightR);
 		}
 		return (int)heightR;
+	}
+	
+	public DisplayObject getParent(){
+		return parentObject;
 	}
 }

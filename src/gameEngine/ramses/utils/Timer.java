@@ -65,8 +65,7 @@ public class Timer extends EventDispatcher{
 		if(_running){
 			_timePassedInSec += GameEngine.getDeltaTime();
 			if(_timePassedInSec >= _timeGivenInSeconds){
-				this.dispatchEvent(new Event(TIMER_ON_TIK));
-				if(_timesRepeated <_givenRepeatAmount){
+				if(_timesRepeated < _givenRepeatAmount){
 					_timePassedInSec = 0;
 					_timesRepeated ++;
 					this.dispatchEvent(new Event(TIMER_ON_REPEAT));
@@ -74,6 +73,7 @@ public class Timer extends EventDispatcher{
 					stop();
 					this.dispatchEvent(new Event(TIMER_ON_END));
 				}
+				this.dispatchEvent(new Event(TIMER_ON_TIK));
 			}
 		}
 	}

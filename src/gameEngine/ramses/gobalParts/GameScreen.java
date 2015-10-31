@@ -41,9 +41,4 @@ public class GameScreen extends DisplayObject{
 	public void update(){
 		dispatchEvent(new Event(FrameworkConsts.ENTER_FRAME,true));
 	}
-	
-	private void testMethod(Event e){
-		EventKeyboard keyEvent = (EventKeyboard)e; 
-		System.out.println(keyEvent.getKeyEvent().getKeyChar());
-	}
 }

@@ -1,6 +1,8 @@
 package gameEngine.ramses.gobalParts;
 
+import gameEngine.ramses.controlls.keyboard.EventKeyboard;
 import gameEngine.ramses.engine.GameEngine;
+import gameEngine.ramses.events.Event;
 
 import java.awt.Image;
 import java.util.ArrayList;
@@ -29,7 +31,6 @@ public class AnimEntity extends SpriteEntity{
 	private void nextFrame(){
 		if(_animationSpriteSheet != null && _animationSpriteSheet.size() > 0){
 			_sprite = _animationSpriteSheet.get(_currentFrame);
-			
 			if(parentObject != null && getSprite() != null){
 				if(_playingAnimation){
 					if(_currentFrame < _animationSpriteSheet.size() - 1){
