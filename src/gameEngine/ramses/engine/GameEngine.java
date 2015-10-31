@@ -43,6 +43,8 @@ public class GameEngine implements Runnable {
 	
 	private static CoreListener _coreListener = new CoreListener();
 	
+	private static float _deltaTime = 0;
+	
 	public GameEngine(String nameWindow, int widthFrame, int heightFrame, int frameRate){
 		
 		setUpFrame(nameWindow,widthFrame,heightFrame);
@@ -131,17 +133,16 @@ public class GameEngine implements Runnable {
 		
 		long lastTimer = System.currentTimeMillis();
 		double delta = 0;
-		
 		long now = 0;
 		
 		while(_running){
-			
 			now = System.nanoTime();
 			delta += (now - lastTime) / nsPerTick;
 			lastTime = now;
 			
 			while(delta >= 1){
 				ticks ++;
+				_deltaTime =  ((float)getCurrentFrameRate()) / 1000;
 				tick();
 				delta -= 1;
 			}
@@ -157,7 +158,7 @@ public class GameEngine implements Runnable {
 
 			//this if statement is for debugging (Will run every second).
 			
-			if(System.currentTimeMillis() - lastTimer > 1000){
+			if(System.currentTimeMillis() - lastTimer >= 1000){
 				lastTimer = System.currentTimeMillis();
 				//System.out.println(ticks + " , " + frames);
 				if(_currentScreen != null){
@@ -220,5 +221,8 @@ public class GameEngine implements Runnable {
 	}
 	public static CoreListener getCoreListener(){
 		return _coreListener;
+	}
+	public static float getDeltaTime(){
+		return _deltaTime;
 	}
 }

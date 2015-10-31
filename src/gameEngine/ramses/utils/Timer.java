@@ -18,7 +18,7 @@ public class Timer extends EventDispatcher{
 	private float _timeGivenInSeconds = 0;
 	private int _givenRepeatAmount = 0;
 	
-	private float _timePassedInSec = 0; 
+	private double _timePassedInSec = 0; 
 	private int _timesRepeated = 0;
 	
 	public void start(float timeInSeconds, int timesToRepeat){
@@ -54,7 +54,7 @@ public class Timer extends EventDispatcher{
 	@SuppressWarnings("unused")
 	private void tik(Event e){
 		if(_running){
-			//_timePassedInSec += GameEngine.getDeltaTime();
+			_timePassedInSec += GameEngine.getDeltaTime();
 			//System.out.println(_timePassedInSec);
 			if(_timePassedInSec >= _timeGivenInSeconds){
 				this.dispatchEvent(new Event(TIMER_TIK));
