@@ -45,9 +45,15 @@ public class GameEngine implements Runnable {
 	
 	private static float _deltaTime = 0;
 	
-	public GameEngine(String nameWindow, int widthFrame, int heightFrame, int frameRate){
+	private static Assets _assets;
+	private static WavAudio _audio;
+	
+	public GameEngine(String nameWindow, int widthFrame, int heightFrame, int frameRate,Assets assets, WavAudio audio){
 		
 		setUpFrame(nameWindow,widthFrame,heightFrame);
+		
+		_assets = assets;
+		_audio = audio;
 		
 		loadAssets();
 		loadAudio();
@@ -69,11 +75,12 @@ public class GameEngine implements Runnable {
 		_canvas = new Canvas();
 		_canvas.setPreferredSize(new Dimension(widthFrame,heightFrame));
 		_canvas.setBackground(Color.PINK);
+		_canvas.requestFocusInWindow();
 		
 		_keyboardManager = new KeyboardManager();
 		_mouseManager = new MouseManager();
 				
-		window.addKeyListener(_keyboardManager);
+		_canvas.addKeyListener(_keyboardManager);
 		_canvas.addMouseListener(_mouseManager);
 		_canvas.addMouseMotionListener(_mouseManager);
 		
@@ -87,7 +94,7 @@ public class GameEngine implements Runnable {
 	
 	private void loadAudio(){
 		try {
-			WavAudio.load();
+			_audio.load();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,11 +108,12 @@ public class GameEngine implements Runnable {
 	}
 	
 	private void loadAssets(){
-		try{
-			Assets.load();
-		}catch(IOException e){
-			System.out.println("ERROR: Unable To Load Images in 'Assets'");
-			System.exit(1);
+		try {
+			_assets.load();
+		} catch (IOException | UnsupportedAudioFileException
+				| LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -224,5 +232,11 @@ public class GameEngine implements Runnable {
 	}
 	public static float getDeltaTime(){
 		return _deltaTime;
+	}
+	public static Assets getAssets(){
+		return _assets;
+	}
+	public static WavAudio getAudio(){
+		return _audio;
 	}
 }

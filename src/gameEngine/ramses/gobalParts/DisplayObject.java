@@ -3,7 +3,6 @@ package gameEngine.ramses.gobalParts;
 import gameEngine.ramses.collisionDetection.AxisProjection;
 import gameEngine.ramses.collisionDetection.SmartBoundingBox;
 import gameEngine.ramses.engine.FrameworkConsts;
-import gameEngine.ramses.engine.GameEngine;
 import gameEngine.ramses.events.Event;
 import gameEngine.ramses.events.EventDispatcher;
 import gameEngine.ramses.utils.math.Vector2D;

@@ -1,8 +1,6 @@
 package gameEngine.ramses.gobalParts;
 
-import gameEngine.ramses.controlls.keyboard.EventKeyboard;
 import gameEngine.ramses.engine.GameEngine;
-import gameEngine.ramses.events.Event;
 
 import java.awt.Image;
 import java.util.ArrayList;
@@ -23,10 +21,6 @@ public class AnimEntity extends SpriteEntity{
 	private Timer _animTimer = new Timer();
 	
 	//Idea: DrawWidth = currentSprite.width * (width / biggestImageWidth) // This also for height
-	
-	public AnimEntity(){
-		
-	}
 	
 	private void nextFrame(){
 		if(_animationSpriteSheet != null && _animationSpriteSheet.size() > 0){
