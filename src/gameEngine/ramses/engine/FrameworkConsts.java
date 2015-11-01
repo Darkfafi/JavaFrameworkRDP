@@ -20,6 +20,7 @@ public class FrameworkConsts {
 	public static final String MOUSE_EXITED = "MouseOnExitEvent";
 	
 	//Keyboard Events
+	public static final String KEY_PRESSED_START = "KeyPressedStartEvent";
 	public static final String KEY_PRESSED = "KeyPressedEvent";
 	public static final String KEY_RELEASED = "KeyReleasedEvent";
 	public static final String KEY_TYPED = "KeyTypedEvent";

@@ -75,7 +75,6 @@ public class GameEngine implements Runnable {
 		_canvas = new Canvas();
 		_canvas.setPreferredSize(new Dimension(widthFrame,heightFrame));
 		_canvas.setBackground(Color.PINK);
-		_canvas.requestFocusInWindow();
 		
 		_keyboardManager = new KeyboardManager();
 		_mouseManager = new MouseManager();
