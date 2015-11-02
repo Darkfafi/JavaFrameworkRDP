@@ -2,18 +2,24 @@ package gameEngine.ramses.controlls.keyboard;
 
 import gameEngine.ramses.events.Event;
 
-import java.awt.event.KeyEvent;
-
 public class EventKeyboard extends Event {
 	
-	private KeyEvent _keyEvent;
+	//private KeyEvent _keyEvent;
 	
-	public EventKeyboard(String type, KeyEvent keyEvent) {
+	private int _keyCode;
+	private char _keyChar;
+	
+	public EventKeyboard(String type, int keyCode) {
 		super(type,true);
-		_keyEvent = keyEvent;
+		_keyCode = keyCode;
+		_keyChar =(char)keyCode;
 	}
 	
-	public KeyEvent getKeyEvent(){
-		return _keyEvent;
+	public int getKeyCode(){
+		return _keyCode;
+	}
+	
+	public char getKeyChar(){
+		return _keyChar;
 	}
 }

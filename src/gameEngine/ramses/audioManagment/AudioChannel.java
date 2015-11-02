@@ -8,11 +8,14 @@ import gameEngine.ramses.events.EventDispatcher;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class AudioChannel extends EventDispatcher {
 	
@@ -41,14 +44,26 @@ public class AudioChannel extends EventDispatcher {
 		}
 	}
 	
-	public void play(AudioInputStream audio,int timesToRepeat,float volume) throws LineUnavailableException, IOException{
-		Clip newClip = AudioSystem.getClip();
+	public void play(String audio,int timesToRepeat,float volume) throws LineUnavailableException, IOException{
+		Clip newClip;// = AudioSystem.getClip();
+		AudioInputStream audioInputStream = null;
+		try {
+			audioInputStream = AudioSystem.getAudioInputStream(WavAudio.class.getResource(audio));
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AudioFormat format = audioInputStream.getFormat();
+		DataLine.Info info = new DataLine.Info(Clip.class, format);
+		newClip = (Clip) AudioSystem.getLine(info);
+		
 		ClipInfo clipInfo;
-		newClip.open(audio);
+		newClip.open(audioInputStream);
 		setClipVolume(newClip,volume);
 		newClip.start();
 		clipInfo = new ClipInfo(newClip,timesToRepeat,volume);
 		_currentAudioClips.add(clipInfo);
+		System.out.println(_currentAudioClips.size());
 	}
 	
 	public void setVolume(float volume){

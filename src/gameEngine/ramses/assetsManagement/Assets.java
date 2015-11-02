@@ -17,44 +17,53 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public abstract class Assets {
+public abstract class Assets implements IResources{
 
+	//createImage("Test","tetris_tutorial.png");
+	//createSpriteSheet("Test2","tetris_tutorial.png",new FrameInfo[]{new FrameInfo(0,0,25,25), new FrameInfo(25,0,25,25),new FrameInfo(50,0,50,25)});
+	//createSpriteSheetWithXml("Test2","walk.png");
 	
+	private Map<String,Image> _imageList = new HashMap<String, Image>();
+	private Map<String,ArrayList<Image>> _spriteSheetList = new HashMap<String,ArrayList<Image>>();
 	
-	private static Map<String,Image> _imageList = new HashMap<String, Image>();
-	private static Map<String,ArrayList<Image>> _spriteSheetList = new HashMap<String,ArrayList<Image>>();
+	private String _baseAssetsFolder = "/";
+	private String _baseXMLDataFolder = "/xmlData/";
 	
-	
-	public static void load() throws IOException{
-		createImage("Test","tetris_tutorial.png");
-		//createSpriteSheet("Test2","tetris_tutorial.png",new FrameInfo[]{new FrameInfo(0,0,25,25), new FrameInfo(25,0,25,25),new FrameInfo(50,0,50,25)});
-		createSpriteSheetWithXml("Test2","walk.png");
+	public Assets(){
+		this("/","/xmlData/");
 	}
 	
-	public static Image getImage(String name){
+	public Assets(String baseAssetsFolder,String baseXMLDataFolder){
+		_baseAssetsFolder = baseAssetsFolder;
+		_baseXMLDataFolder = baseXMLDataFolder;
+	}
+	
+	public Image getImage(String name){
 		return _imageList.get(name);
 	}
 	
-	public static ArrayList<Image> getSpriteSheet(String name){
+	public ArrayList<Image> getSpriteSheet(String name){
 		return _spriteSheetList.get(name);
 	}
 	
-	private static void createImage(String name, String path) throws IOException{
-		BufferedImage loadedImage = ImageIO.read(Assets.class.getResource("/"+path));
+	@SuppressWarnings("unused")
+	protected void createImage(String name, String path) throws IOException{
+		BufferedImage loadedImage = ImageIO.read(Assets.class.getResource(_baseAssetsFolder+path));
 		createImage(name,path,0,0,loadedImage.getWidth(),loadedImage.getHeight());
 		
 	}
 	
-	private static void createImage(String name, String path,int cutX,int cutY,int cutWidth,int cutHeight) throws IOException{
-		BufferedImage loadedImage = ImageIO.read(Assets.class.getResource("/"+path));
+	protected void createImage(String name, String path,int cutX,int cutY,int cutWidth,int cutHeight) throws IOException{
+		BufferedImage loadedImage = ImageIO.read(Assets.class.getResource(_baseAssetsFolder+path));
 		Image image = loadedImage.getSubimage(cutX, cutY, cutWidth, cutHeight);
 		_imageList.put(name,image);
 	}
 	
-	private static void createSpriteSheetWithXml(String name,String pathImage){
+	@SuppressWarnings("unused")
+	protected void createSpriteSheetWithXml(String name,String pathImage){
 		try{
 			//Assets.class.getResource("/xmlData/"+pathImage).getFile().replaceFirst("[.][^.]+$", ".xml")
-			String pathStuf = "/xmlData/" + pathImage.replaceFirst("[.][^.]+$", ".xml");
+			String pathStuf = _baseXMLDataFolder + pathImage.replaceFirst("[.][^.]+$", ".xml");
 			File xmlFile = new File(Assets.class.getResource(pathStuf).toURI());
 			System.out.println(xmlFile);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -96,8 +105,8 @@ public abstract class Assets {
 		}
 	}
 
-	private static void createSpriteSheet(String name,String path,FrameInfo[] allInfoFrames) throws IOException{
-		BufferedImage loadedImage = ImageIO.read(Assets.class.getResource("/"+path));
+	protected void createSpriteSheet(String name,String path,FrameInfo[] allInfoFrames) throws IOException{
+		BufferedImage loadedImage = ImageIO.read(Assets.class.getResource(_baseAssetsFolder+path));
 		
 		ArrayList<Image> spriteSheet = new ArrayList<Image>();
 		Image currentImage;
