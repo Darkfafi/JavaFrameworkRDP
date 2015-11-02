@@ -1,6 +1,5 @@
 package gameEngine.ramses.gobalParts;
 
-import gameEngine.ramses.controlls.keyboard.EventKeyboard;
 import gameEngine.ramses.engine.FrameworkConsts;
 import gameEngine.ramses.events.Event;
 
