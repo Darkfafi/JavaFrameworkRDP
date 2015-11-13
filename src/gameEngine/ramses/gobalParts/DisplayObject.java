@@ -146,7 +146,7 @@ public class DisplayObject extends EventDispatcher{
 	
 	public int getWorldPositionX(){
 		
-		int xPos = (int) getWorldPosition().getX();
+		int xPos = Math.round(getWorldPosition().getX());
 		/*
 		if(parentObject != null){
 			xPos += parentObject.getWorldPositionX();
@@ -156,7 +156,7 @@ public class DisplayObject extends EventDispatcher{
 	}
 	public int getWorldPositionY(){
 		
-		int yPos = (int) getWorldPosition().getY();
+		int yPos = Math.round(getWorldPosition().getY());
 		/*
 		if(parentObject != null){
 			yPos += parentObject.getWorldPositionY();
@@ -172,6 +172,8 @@ public class DisplayObject extends EventDispatcher{
 			Vector2D parentCalcVec = new Vector2D(x, y);
 			parentCalcVec.setAngle(parentCalcVec.getAngle() + Math.toRadians(parentObject.getWorldRotation()));
 			worldPosVec = parentObject.getWorldPosition().clone();
+			worldPosVec.setX(Math.round(worldPosVec.getX()));
+			worldPosVec.setY(Math.round(worldPosVec.getY()));
 			worldPosVec.add(parentCalcVec);
 			//System.out.println(parentObject + " " + worldPosVec);		
 		}

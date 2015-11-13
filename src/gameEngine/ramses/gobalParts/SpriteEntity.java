@@ -9,10 +9,11 @@ public class SpriteEntity extends DisplayObject{
 	
 	public void renderObject(GameScreen gameScreen, int xStart, int yStart,float xScaleStart, float yScaleStart){
 		
-		int pivotPositionRevX = (int)(-getPivotX() * getWidth(false));
-		int pivotPositionRevY = (int)(-getPivotY() *  getHeight(false));
+		int pivotPositionRevX = Math.round((int)(-getPivotX() * getWidth(false)));
+		int pivotPositionRevY = Math.round((int)(-getPivotY() *  getHeight(false)));
 		int xPosStart = this.getWorldPositionX() + pivotPositionRevX;
 		int yPosStart = this.getWorldPositionY() + pivotPositionRevY;
+		
 		if(_sprite != null){
 			int widthDraw = (int)(_sprite.getWidth(null) * (xScaleStart * scaleX));
 			int heightDraw = (int)(_sprite.getHeight(null) * (yScaleStart * scaleY));
