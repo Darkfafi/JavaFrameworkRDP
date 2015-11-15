@@ -13,9 +13,9 @@ public class SmartBoundingBox {
 	private Vector2D[] _corners = new Vector2D[4];
 	
 	public SmartBoundingBox(DisplayObject displayObject){
-		_upL = new Vector2D(-(displayObject.getWidth() * displayObject.getPivotX()),-(displayObject.getHeight() * displayObject.getPivotY()));
-		_upR = _upL.clone(); _upR.setX(_upR.getX() + displayObject.getWidth());
-		_downL = _upL.clone(); _downL.setY(_downL.getY() + displayObject.getHeight());
+		_upL = new Vector2D(-(displayObject.getWidth(false) * displayObject.getPivotX()),-(displayObject.getHeight(false) * displayObject.getPivotY()));
+		_upR = _upL.clone(); _upR.setX(_upR.getX() + displayObject.getWidth(false));
+		_downL = _upL.clone(); _downL.setY(_downL.getY() + displayObject.getHeight(false));
 		_downR = _downL.clone(); _downR.setX(_upR.getX());
 		
 		_corners[0] = _upL;

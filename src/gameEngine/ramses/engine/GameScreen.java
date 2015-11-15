@@ -1,10 +1,10 @@
 package gameEngine.ramses.engine;
 
 import gameEngine.ramses.entities.DisplayObjectContainer;
-
-import gameEngine.ramses.engine.FrameworkConsts;
 import gameEngine.ramses.events.Event;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
@@ -20,6 +20,12 @@ public class GameScreen extends DisplayObjectContainer{
 		_g.drawImage(spriteToDraw, x, y,width,height, null);
 		_g.rotate(Math.toRadians(-rotation),x + pivotX, y + pivotY);
 		
+	}
+	
+	public void drawText(String text, Color color, Font font, int x, int y){
+		_g.setFont(font);
+		_g.setColor(color);
+		_g.drawString(text, x, y);
 	}
 	
 	public void renderScreen(Graphics2D g){

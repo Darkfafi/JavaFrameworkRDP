@@ -1,5 +1,7 @@
 package gameEngine.ramses.text;
 
+import gameEngine.ramses.engine.GameEngine;
+import gameEngine.ramses.engine.GameScreen;
 import gameEngine.ramses.entities.DisplayObject;
 
 import java.awt.Color;
@@ -14,6 +16,12 @@ public class TextField extends DisplayObject {
 	private Color _color = Color.BLACK;
 	private Font _font = new Font("Serif", Font.BOLD, 12);
 	private int _size = 12;
+	
+	@Override
+	public void renderObject(GameScreen gameScreen){
+		super.renderObject(gameScreen);
+		gameScreen.drawText(_text, _color, _font, xPosStart, yPosStart);
+	}
 	
 	public void setFont(String fontLocation){
 		//_font = font;
@@ -46,8 +54,6 @@ public class TextField extends DisplayObject {
 	public Color getColor(){
 		return _color;
 	}
-	
-	
 	public void setText(String text){
 		_text = text;
 	}
@@ -57,5 +63,4 @@ public class TextField extends DisplayObject {
 	public void addText(String text){
 		_text += text;
 	}
-	
 }
