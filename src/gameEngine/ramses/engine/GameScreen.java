@@ -1,4 +1,6 @@
-package gameEngine.ramses.gobalParts;
+package gameEngine.ramses.engine;
+
+import gameEngine.ramses.entities.DisplayObjectContainer;
 
 import gameEngine.ramses.engine.FrameworkConsts;
 import gameEngine.ramses.events.Event;
@@ -6,9 +8,12 @@ import gameEngine.ramses.events.Event;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
-public class GameScreen extends DisplayObject{
+public class GameScreen extends DisplayObjectContainer{
 	private Graphics2D _g;
 	
+	public GameScreen(){
+		this.setPivotPoint(0, 0);
+	}
 	
 	public void drawSprite(Image spriteToDraw,int x,int y,int width,int height, double rotation,int pivotX, int pivotY){
 		_g.rotate(Math.toRadians(rotation), x + pivotX, y + pivotY);
@@ -17,22 +22,11 @@ public class GameScreen extends DisplayObject{
 		
 	}
 	
-	public void renderObject(Graphics2D g){
-		
+	public void renderScreen(Graphics2D g){
 		_g = g;
-		
-		// add een global object en render alles daar in. (cat in cat werkt wel maar 2 cats in gamescreen geeft lag)
-		//stage
-		
-		int l = childerenObjects.size();
-		for(int i = l - 1; i >= 0; i--){
-			if(childerenObjects.get(i) instanceof SpriteEntity){
-				//System.out.println(i);
-				SpriteEntity sprEntity = (SpriteEntity)childerenObjects.get(i);
-				sprEntity.renderObject(this, 0, 0,1,1);
-			}
-		}
+		renderObject(this);
 	}
+	
 	public void secUpdate(){
 		dispatchEvent(new Event(FrameworkConsts.ENTER_SECOND,true));
 	}

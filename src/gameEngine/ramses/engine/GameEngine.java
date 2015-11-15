@@ -5,7 +5,6 @@ import gameEngine.ramses.audioManagment.WavAudio;
 import gameEngine.ramses.controlls.keyboard.KeyboardManager;
 import gameEngine.ramses.controlls.mouse.MouseManager;
 import gameEngine.ramses.events.CoreListener;
-import gameEngine.ramses.gobalParts.GameScreen;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -199,7 +198,7 @@ public class GameEngine implements Runnable {
 		g.drawImage(_image, 0, 0, _canvas.getWidth(),_canvas.getHeight(),null);
 		
 		if(_currentScreen != null){
-			_currentScreen.renderObject(g);
+			_currentScreen.renderScreen(g);
 		}
 		
 		g.dispose();
