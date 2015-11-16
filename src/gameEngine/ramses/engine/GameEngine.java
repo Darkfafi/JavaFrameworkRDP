@@ -5,7 +5,6 @@ import gameEngine.ramses.audioManagment.WavAudio;
 import gameEngine.ramses.controlls.keyboard.KeyboardManager;
 import gameEngine.ramses.controlls.mouse.MouseManager;
 import gameEngine.ramses.events.CoreListener;
-import gameEngine.ramses.gobalParts.GameScreen;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -44,6 +43,7 @@ public class GameEngine implements Runnable {
 	private static CoreListener _coreListener = new CoreListener();
 	
 	private static float _deltaTime = 0;
+	private static Graphics2D _graphics;
 	
 	private static Assets _assets;
 	private static WavAudio _audio;
@@ -121,6 +121,7 @@ public class GameEngine implements Runnable {
 		Thread t =  new Thread(this);
 		t.setPriority(Thread.MAX_PRIORITY);
 		t.start();
+		this.render();
 	}
 	
 	public void stop(){
@@ -193,13 +194,15 @@ public class GameEngine implements Runnable {
 		}
 		Graphics2D g = (Graphics2D)bs.getDrawGraphics();
 		
+		_graphics = g;
+		
 		g.setColor(Color.PINK);
 		g.fillRect(0, 0, _canvas.getWidth(), _canvas.getHeight());
 		
 		g.drawImage(_image, 0, 0, _canvas.getWidth(),_canvas.getHeight(),null);
 		
 		if(_currentScreen != null){
-			_currentScreen.renderObject(g);
+			_currentScreen.renderScreen(g);
 		}
 		
 		g.dispose();
@@ -237,5 +240,8 @@ public class GameEngine implements Runnable {
 	}
 	public static WavAudio getAudio(){
 		return _audio;
+	}
+	public static Graphics2D getGraphics2D(){
+		return _graphics;
 	}
 }

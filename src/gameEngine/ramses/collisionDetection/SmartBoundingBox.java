@@ -1,6 +1,6 @@
 package gameEngine.ramses.collisionDetection;
 
-import gameEngine.ramses.gobalParts.DisplayObject;
+import gameEngine.ramses.entities.DisplayObject;
 import gameEngine.ramses.utils.math.Vector2D;
 
 public class SmartBoundingBox {
@@ -12,10 +12,10 @@ public class SmartBoundingBox {
 	
 	private Vector2D[] _corners = new Vector2D[4];
 	
-	public SmartBoundingBox(DisplayObject object){
-		_upL = new Vector2D(-(object.getWidth() * object.getPivotX()),-(object.getHeight() * object.getPivotY()));
-		_upR = _upL.clone(); _upR.setX(_upR.getX() + object.getWidth());
-		_downL = _upL.clone(); _downL.setY(_downL.getY() + object.getHeight());
+	public SmartBoundingBox(DisplayObject displayObject){
+		_upL = new Vector2D(-(displayObject.getWidth(false) * displayObject.getPivotX()),-(displayObject.getHeight(false) * displayObject.getPivotY()));
+		_upR = _upL.clone(); _upR.setX(_upR.getX() + displayObject.getWidth(false));
+		_downL = _upL.clone(); _downL.setY(_downL.getY() + displayObject.getHeight(false));
 		_downR = _downL.clone(); _downR.setX(_upR.getX());
 		
 		_corners[0] = _upL;
@@ -24,10 +24,10 @@ public class SmartBoundingBox {
 		_corners[3] = _downL;
 		
 		for(int i = 0; i < 4; i++){
-			_corners[i].setAngle(Math.toRadians(Math.toDegrees(_corners[i].getAngle()) + object.getWorldRotation()));
+			_corners[i].setAngle(Math.toRadians(Math.toDegrees(_corners[i].getAngle()) + displayObject.getWorldRotation()));
 			//_corners[i].setAngle(Math.toRadians(Math.toDegrees(_corners[i].getAngle()) + object.rotation));
-			_corners[i].setX(_corners[i].getX() + object.getWorldPositionX());
-			_corners[i].setY(_corners[i].getY() + object.getWorldPositionY());
+			_corners[i].setX(_corners[i].getX() + displayObject.getWorldPositionX());
+			_corners[i].setY(_corners[i].getY() + displayObject.getWorldPositionY());
 		}
 		
 		//System.out.println("UL " + _upL.toString() + " UR " + _upR.toString() + " DL " +  _downL.toString() + " DR " +_downR.toString());

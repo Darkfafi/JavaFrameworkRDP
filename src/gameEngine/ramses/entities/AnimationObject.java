@@ -1,4 +1,4 @@
-package gameEngine.ramses.gobalParts;
+package gameEngine.ramses.entities;
 
 import gameEngine.ramses.engine.GameEngine;
 
@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class AnimEntity extends SpriteEntity{
-	
+public class AnimationObject extends SpriteObject {
 	public float animationSpeed = 1f;
 	//public int animationFrameRate = 30;
 	
@@ -19,8 +18,6 @@ public class AnimEntity extends SpriteEntity{
 	private boolean _playingAnimation = false;
 	
 	private Timer _animTimer = new Timer();
-	
-	//Idea: DrawWidth = currentSprite.width * (width / biggestImageWidth) // This also for height
 	
 	private void nextFrame(){
 		if(_animationSpriteSheet != null && _animationSpriteSheet.size() > 0){
@@ -60,9 +57,10 @@ public class AnimEntity extends SpriteEntity{
 					largestHeight = currentSprite.getHeight(null);
 				}
 			}
-			//currentSprite =  _animationSpriteSheet.get(indexBiggestFrame); // biggest frame in size.
 			
 			super.setWidthAndHeight(largestWidth, largestHeight);
+		}else{
+			super.setWidthAndHeight(width, height);
 		}
 	}
 	
@@ -70,14 +68,9 @@ public class AnimEntity extends SpriteEntity{
 		_animationSpriteSheet = spriteSheet;
 		setSprite(_animationSpriteSheet.get(0));
 		gotoAndPlay(0);
-		
-		/*
-		if(_playingAnimation){
-			gotoAndPlay(0);
-		}else{
-			gotoAndStop(0);
-		}*/
 	}
+	
+	
 	
 	public void gotoAndPlay(int frameIndex){
 		gotoAndPlay(frameIndex,_repeat);

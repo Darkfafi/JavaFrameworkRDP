@@ -1,18 +1,14 @@
-package gameEngine.ramses.gobalParts;
+package gameEngine.ramses.entities;
 
 import gameEngine.ramses.collisionDetection.AxisProjection;
 import gameEngine.ramses.collisionDetection.SmartBoundingBox;
-import gameEngine.ramses.engine.FrameworkConsts;
-import gameEngine.ramses.events.Event;
+import gameEngine.ramses.engine.GameScreen;
 import gameEngine.ramses.events.EventDispatcher;
 import gameEngine.ramses.utils.math.Vector2D;
 
-import java.util.ArrayList;
-
-public class DisplayObject extends EventDispatcher{
-
-	protected DisplayObject parentObject;
-	protected ArrayList<DisplayObject> childerenObjects = new ArrayList<DisplayObject>();
+public class DisplayObject extends EventDispatcher {
+	
+	protected DisplayObjectContainer parentObject;
 	
 	public int x = 0;
 	public int y = 0;
@@ -28,66 +24,22 @@ public class DisplayObject extends EventDispatcher{
 	private float _pivotPointX = 0.5f;
 	private float _pivotPointY = 0.5f;
 	
-	private boolean _shouldRender = false; // Als het niet in de camera is dan render het object niet. Ook niet buiten het scherm. Dit geeft meer performance.
+	//Rendering
+	protected int pivotPositionRevX = 0;
+	protected int pivotPositionRevY = 0;
+	protected int xPosStart = 0;
+	protected int yPosStart = 0;
 	
-	public void addChild(DisplayObject displayObject){
-		if(displayObject != this && !(displayObject instanceof GameScreen)){
-			if(displayObject.parentObject == this || displayObject.parentObject == null){
-				displayObject.parentObject = this;
-				childerenObjects.add(displayObject);
-			}else{
-				displayObject.parentObject.removeChild(displayObject);
-				addChild(displayObject);
-			}
-			displayObject.setParentListener(this);
-			displayObject.dispatchEvent(new Event(FrameworkConsts.ADDED_TO_STAGE,true));
-		}else{
-			System.err.println("Cannot add DisplayObject to itself and cannot add a Screen to a displayObject");
-		}
-	}
-	
-	protected void setWidthAndHeight(int width, int height){
+	public void renderObject(GameScreen gameScreen){
 		
-		_width = width;
-		_height = height;
+		pivotPositionRevX = Math.round((int)(-getPivotX() * getWidth(false)));
+		pivotPositionRevY = Math.round((int)(-getPivotY() *  getHeight(false)));
+		xPosStart = this.getWorldPositionX() + pivotPositionRevX;
+		yPosStart = this.getWorldPositionY() + pivotPositionRevY;
 	}
 	
-	public void removeChild(DisplayObject displayObject){
-		
-		int index = childerenObjects.indexOf(displayObject);
-		if(index != -1){
-			displayObject.parentObject = null;
-			childerenObjects.remove(index);
-		}else{
-			System.err.println("DisplayObject does not contain object: " + displayObject.toString());
-		}
-		
-	}
-	
-	public void remove(){
-		if(parentObject != null){
-			dispatchEvent(new Event(FrameworkConsts.REMOVED_FROM_STAGE,true));
-			parentObject.removeChild(this);
-		}
-	}
-	
-	public boolean containsChild(DisplayObject displayObject){
-		boolean result = false;
-		int l = childerenObjects.size();
-		for(int i = l - 1; i >= 0; i--){
-			if(childerenObjects.get(i) == displayObject){
-				result = true;
-				break;
-			}
-		}
-		return result;
-	}
 	
 	public boolean hitTestObject(DisplayObject other){
-		return hitTestObject(other,true);
-	}
-	
-	public boolean hitTestObject(DisplayObject other,boolean checkChilderen){
 		
 		boolean result = true;
 		
@@ -114,24 +66,18 @@ public class DisplayObject extends EventDispatcher{
 	        	break;
 	        }
 		}
-		if(!result && childerenObjects.size() > 0){
-			for(int i = childerenObjects.size() - 1; i >= 0; i--){
-				result = childerenObjects.get(i).hitTestObject(other);
-				if(result){
-					break;
-				}
-			}
-		}
 		
 		return result;
 	}
 	
-	// Getters and Setters
-	
-	public boolean getShouldRender(){
-		return _shouldRender;
+	protected void setWidthAndHeight(int width, int height){
+		
+		_width = width;
+		_height = height;
 	}
 	
+	
+	// Getters 
 	public void setPivotPoint(float xRatio, float yRatio){
 		_pivotPointX = xRatio;
 		_pivotPointY = yRatio;
@@ -147,20 +93,12 @@ public class DisplayObject extends EventDispatcher{
 	public int getWorldPositionX(){
 		
 		int xPos = Math.round(getWorldPosition().getX());
-		/*
-		if(parentObject != null){
-			xPos += parentObject.getWorldPositionX();
-		}*/
 		
 		return xPos;
 	}
 	public int getWorldPositionY(){
 		
 		int yPos = Math.round(getWorldPosition().getY());
-		/*
-		if(parentObject != null){
-			yPos += parentObject.getWorldPositionY();
-		}*/
 		
 		return yPos;
 	}
@@ -191,6 +129,23 @@ public class DisplayObject extends EventDispatcher{
 		return rotationObj;
 	}
 	
+	public float getWorldScaleX(){
+		float thisScaleX = scaleX;
+		
+		if(parentObject != null){
+			thisScaleX *= parentObject.getWorldScaleX();
+		}
+		return thisScaleX;
+ 	}
+	public float getWorldScaleY(){
+		float thisScaleY = scaleY;
+		
+		if(parentObject != null){
+			thisScaleY *= parentObject.getWorldScaleY();
+		}
+		return thisScaleY;
+	}
+	
 	public int getWidth(){
 		return getWidth(true);
 	}
@@ -200,7 +155,7 @@ public class DisplayObject extends EventDispatcher{
 	}
 	
 	public int getWidth(boolean positive){
-		int widthR = (int) (scaleX * _width);
+		int widthR = (int) (this.getWorldScaleX() * _width);
 		if(positive){
 			widthR = Math.abs(widthR);
 		}
@@ -208,14 +163,14 @@ public class DisplayObject extends EventDispatcher{
 	}
 	
 	public int getHeight(boolean positive){
-		int heightR = (int) (scaleY * _height);
+		int heightR = (int) (this.getWorldScaleY() * _height);
 		if(positive){
 			heightR = Math.abs(heightR);
 		}
 		return (int)heightR;
 	}
 	
-	public DisplayObject getParent(){
+	public DisplayObjectContainer getParent(){
 		return parentObject;
 	}
 }
