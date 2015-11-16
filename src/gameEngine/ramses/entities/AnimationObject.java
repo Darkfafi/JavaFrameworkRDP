@@ -65,9 +65,11 @@ public class AnimationObject extends SpriteObject {
 	}
 	
 	public void setAnimationSheet(ArrayList<Image> spriteSheet){
-		_animationSpriteSheet = spriteSheet;
-		setSprite(_animationSpriteSheet.get(0));
-		gotoAndPlay(0);
+		if(_animationSpriteSheet != spriteSheet){
+			_animationSpriteSheet = spriteSheet;
+			setSprite(_animationSpriteSheet.get(0));
+			gotoAndPlay(0);
+		}
 	}
 	
 	
