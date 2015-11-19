@@ -5,7 +5,7 @@ import gameEngine.ramses.audioManagment.WavAudio;
 import gameEngine.ramses.controlls.keyboard.KeyboardManager;
 import gameEngine.ramses.controlls.mouse.MouseManager;
 import gameEngine.ramses.events.CoreListener;
-import gameEngine.ramses.screen.GameScreen;
+import gameEngine.ramses.screen.Screen;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -38,8 +38,8 @@ public class GameEngine implements Runnable {
 	private KeyboardManager _keyboardManager;
 	private MouseManager _mouseManager;
 	
-	private GameScreen _currentScreen;
-	private static GameScreen _currentGameScreen;
+	private Screen _currentScreen;
+	private static Screen _currentGameScreen;
 	
 	private static CoreListener _coreListener = new CoreListener();
 	
@@ -191,7 +191,7 @@ public class GameEngine implements Runnable {
 		
 		if(bs == null){
 			_canvas.createBufferStrategy(3);
-			return;
+			bs = _canvas.getBufferStrategy();
 		}
 		Graphics2D g = (Graphics2D)bs.getDrawGraphics();
 		
@@ -210,11 +210,15 @@ public class GameEngine implements Runnable {
 		bs.show();
 	}
 	
-	public void setScreen(GameScreen screen){
+	public void setScreen(Screen screen){
+		if(_currentScreen != null){
+			_currentScreen.removeScreenBuildDown();
+		}
 		_currentScreen = screen;
+		_currentScreen.setScreenBuildUp();
 		_currentGameScreen = _currentScreen;
 	}
-	public GameScreen getScreen(GameScreen screen){
+	public Screen getScreen(Screen screen){
 		return _currentScreen;
 	}
 	
@@ -227,7 +231,7 @@ public class GameEngine implements Runnable {
 	public static int getScreenHeight(){
 		return currentHeight;
 	}
-	public static GameScreen currentGameScreen(){
+	public static Screen currentGameScreen(){
 		return _currentGameScreen;
 	}
 	public static CoreListener getCoreListener(){

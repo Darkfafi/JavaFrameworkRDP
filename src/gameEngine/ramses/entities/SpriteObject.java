@@ -1,6 +1,6 @@
 package gameEngine.ramses.entities;
 
-import gameEngine.ramses.screen.GameScreen;
+import gameEngine.ramses.screen.Screen;
 
 import java.awt.Image;
 
@@ -9,7 +9,7 @@ public class SpriteObject extends DisplayObjectContainer {
 	protected Image _sprite;
 	
 	@Override
-	public void renderObject(GameScreen gameScreen){
+	public void renderObject(Screen gameScreen){
 		super.renderObject(gameScreen);
 		if(_sprite != null){
 			int widthDraw = (int)(_sprite.getWidth(null) * (this.getWorldScaleX()));

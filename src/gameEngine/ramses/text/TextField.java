@@ -2,7 +2,7 @@ package gameEngine.ramses.text;
 
 import gameEngine.ramses.engine.GameEngine;
 import gameEngine.ramses.entities.DisplayObject;
-import gameEngine.ramses.screen.GameScreen;
+import gameEngine.ramses.screen.Screen;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -19,7 +19,7 @@ public class TextField extends DisplayObject {
 	private int _size = 12;
 	
 	@Override
-	public void renderObject(GameScreen gameScreen){
+	public void renderObject(Screen gameScreen){
 		super.renderObject(gameScreen);
 		gameScreen.drawText(_text, _color, _font, xPosStart, yPosStart);
 	}

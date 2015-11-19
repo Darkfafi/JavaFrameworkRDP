@@ -2,6 +2,7 @@ package gameEngine.ramses.screen;
 
 import gameEngine.ramses.engine.Framework;
 import gameEngine.ramses.engine.GameEngine;
+import gameEngine.ramses.entities.DisplayObject;
 import gameEngine.ramses.entities.DisplayObjectContainer;
 import gameEngine.ramses.events.Event;
 
@@ -10,26 +11,12 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
-public class GameScreen extends DisplayObjectContainer{
+public abstract class Screen extends DisplayObjectContainer{
 	
 	private Graphics2D _g;
-	//private ArrayList<Camera> _allCameras = new ArrayList<Camera>(); 
 	private Camera _camera;
 	
-	public GameScreen(){
-		this.setPivotPoint(0, 0);
-		_camera = new Camera(Framework.MAIN_CAMERA,0,0,GameEngine.getScreenWidth(), GameEngine.getScreenHeight());
-		this.addChild(_camera);
-		//_allCameras.add(camera);
-	}
-	
 	public void drawSprite(Image spriteToDraw,int x,int y,int width,int height, double rotation,int pivotX, int pivotY){
-		// all cameras draw this in their perspective.
-		/*
-		for(int i = 0; i < _allCameras.size(); i++){
-			_allCameras.get(i);
-			ImageIO.rea	
-		}*/
 		_g.rotate(Math.toRadians(rotation), x - _camera.x + pivotX, y - _camera.y + pivotY);
 		_g.drawImage(spriteToDraw, x - _camera.x, y - _camera.y,width,height, null);
 		_g.rotate(Math.toRadians(-rotation),x - _camera.x + pivotX, y - _camera.y + pivotY);
@@ -49,7 +36,19 @@ public class GameScreen extends DisplayObjectContainer{
 	public void secUpdate(){
 		dispatchEvent(new Event(Framework.ENTER_SECOND,true));
 	}
-	
+	public void setScreenBuildUp(){
+		this.setPivotPoint(0, 0);
+		_camera = new Camera(Framework.MAIN_CAMERA,0,0,GameEngine.getScreenWidth(), GameEngine.getScreenHeight());
+		this.addChild(_camera);
+	}
+	public void removeScreenBuildDown(){
+		DisplayObject currentChild; 
+		for(int i = this.childerenObjects.size() - 1; i >= 0; i--){
+			currentChild = childerenObjects.get(i);
+			this.removeChild(currentChild);
+			currentChild = null;
+		}
+	}
 	public void update(){
 		dispatchEvent(new Event(Framework.ENTER_FRAME,true));
 	}

@@ -2,7 +2,7 @@ package gameEngine.ramses.entities;
 
 import gameEngine.ramses.engine.Framework;
 import gameEngine.ramses.events.Event;
-import gameEngine.ramses.screen.GameScreen;
+import gameEngine.ramses.screen.Screen;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class DisplayObjectContainer extends DisplayObject {
 	protected ArrayList<DisplayObject> childerenObjects = new ArrayList<DisplayObject>();
 	
 	@Override
-	public void renderObject(GameScreen gameScreen){
+	public void renderObject(Screen gameScreen){
 		super.renderObject(gameScreen);
 		int l = childerenObjects.size();
 		for(int i = l - 1; i >= 0; i--){

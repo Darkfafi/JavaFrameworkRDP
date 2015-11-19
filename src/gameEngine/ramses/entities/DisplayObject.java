@@ -3,7 +3,7 @@ package gameEngine.ramses.entities;
 import gameEngine.ramses.collisionDetection.AxisProjection;
 import gameEngine.ramses.collisionDetection.SmartBoundingBox;
 import gameEngine.ramses.events.EventDispatcher;
-import gameEngine.ramses.screen.GameScreen;
+import gameEngine.ramses.screen.Screen;
 import gameEngine.ramses.utils.math.Vector2D;
 
 public class DisplayObject extends EventDispatcher {
@@ -30,7 +30,7 @@ public class DisplayObject extends EventDispatcher {
 	protected int xPosStart = 0;
 	protected int yPosStart = 0;
 	
-	public void renderObject(GameScreen gameScreen){
+	public void renderObject(Screen gameScreen){
 		
 		pivotPositionRevX = Math.round((int)(-getPivotX() * getWidth(false)));
 		pivotPositionRevY = Math.round((int)(-getPivotY() *  getHeight(false)));
