@@ -1,8 +1,8 @@
 package gameEngine.ramses.entities;
 
-import gameEngine.ramses.engine.FrameworkConsts;
-import gameEngine.ramses.engine.GameScreen;
+import gameEngine.ramses.engine.Framework;
 import gameEngine.ramses.events.Event;
+import gameEngine.ramses.screen.GameScreen;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class DisplayObjectContainer extends DisplayObject {
 				addChild(displayObject);
 			}
 			displayObject.setParentListener(this);
-			displayObject.dispatchEvent(new Event(FrameworkConsts.ADDED_TO_STAGE,true));
+			displayObject.dispatchEvent(new Event(Framework.ADDED_TO_STAGE,true));
 		}else{
 			System.err.println("Cannot add DisplayObject to itself");
 		}

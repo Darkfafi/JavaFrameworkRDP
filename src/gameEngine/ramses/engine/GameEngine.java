@@ -5,6 +5,7 @@ import gameEngine.ramses.audioManagment.WavAudio;
 import gameEngine.ramses.controlls.keyboard.KeyboardManager;
 import gameEngine.ramses.controlls.mouse.MouseManager;
 import gameEngine.ramses.events.CoreListener;
+import gameEngine.ramses.screen.GameScreen;
 
 import java.awt.Canvas;
 import java.awt.Color;

@@ -46,7 +46,6 @@ public abstract class Assets implements IResources{
 		return _spriteSheetList.get(name);
 	}
 	
-	@SuppressWarnings("unused")
 	protected void createImage(String name, String path) throws IOException{
 		BufferedImage loadedImage = ImageIO.read(Assets.class.getResource(_baseAssetsFolder+path));
 		createImage(name,path,0,0,loadedImage.getWidth(),loadedImage.getHeight());
@@ -59,7 +58,6 @@ public abstract class Assets implements IResources{
 		_imageList.put(name,image);
 	}
 	
-	@SuppressWarnings("unused")
 	protected void createSpriteSheetWithXml(String name,String pathImage){
 		try{
 			//Assets.class.getResource("/xmlData/"+pathImage).getFile().replaceFirst("[.][^.]+$", ".xml")

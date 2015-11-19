@@ -2,8 +2,8 @@ package gameEngine.ramses.entities;
 
 import gameEngine.ramses.collisionDetection.AxisProjection;
 import gameEngine.ramses.collisionDetection.SmartBoundingBox;
-import gameEngine.ramses.engine.GameScreen;
 import gameEngine.ramses.events.EventDispatcher;
+import gameEngine.ramses.screen.GameScreen;
 import gameEngine.ramses.utils.math.Vector2D;
 
 public class DisplayObject extends EventDispatcher {

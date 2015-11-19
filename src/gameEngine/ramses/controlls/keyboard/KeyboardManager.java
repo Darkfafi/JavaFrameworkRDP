@@ -1,6 +1,6 @@
 package gameEngine.ramses.controlls.keyboard;
 
-import gameEngine.ramses.engine.FrameworkConsts;
+import gameEngine.ramses.engine.Framework;
 import gameEngine.ramses.events.EventDispatcher;
 
 import java.awt.event.KeyEvent;
@@ -21,10 +21,10 @@ public class KeyboardManager extends EventDispatcher implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		if(!_keys.contains(e.getKeyCode())){
 			_keys.add((Integer)e.getKeyCode());
-			this.dispatchEvent(new EventKeyboard(FrameworkConsts.KEY_PRESSED_START,e.getKeyCode()));
+			this.dispatchEvent(new EventKeyboard(Framework.KEY_PRESSED_START,e.getKeyCode()));
 		}
 		for(int i = _keys.size() - 1; i >= 0; i--){
-			this.dispatchEvent(new EventKeyboard(FrameworkConsts.KEY_PRESSED,_keys.get(i)));
+			this.dispatchEvent(new EventKeyboard(Framework.KEY_PRESSED,_keys.get(i)));
 		}
 	}
 
@@ -34,12 +34,12 @@ public class KeyboardManager extends EventDispatcher implements KeyListener{
 			_keys.remove((Integer)e.getKeyCode());
 		}
 		
-		this.dispatchEvent(new EventKeyboard(FrameworkConsts.KEY_RELEASED,e.getKeyCode()));
+		this.dispatchEvent(new EventKeyboard(Framework.KEY_RELEASED,e.getKeyCode()));
 	}
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
-		this.dispatchEvent(new EventKeyboard(FrameworkConsts.KEY_TYPED,e.getKeyCode()));
+		this.dispatchEvent(new EventKeyboard(Framework.KEY_TYPED,e.getKeyCode()));
 	}
 	
 	

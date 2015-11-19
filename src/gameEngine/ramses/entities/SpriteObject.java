@@ -1,6 +1,6 @@
 package gameEngine.ramses.entities;
 
-import gameEngine.ramses.engine.GameScreen;
+import gameEngine.ramses.screen.GameScreen;
 
 import java.awt.Image;
 

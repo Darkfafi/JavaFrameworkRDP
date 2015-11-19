@@ -1,6 +1,6 @@
 package gameEngine.ramses.utils;
 
-import gameEngine.ramses.engine.FrameworkConsts;
+import gameEngine.ramses.engine.Framework;
 import gameEngine.ramses.engine.GameEngine;
 import gameEngine.ramses.events.Event;
 import gameEngine.ramses.events.EventDispatcher;
@@ -28,7 +28,7 @@ public class Timer extends EventDispatcher{
 			if(_timeGivenInSeconds != 0){
 				stop();
 			}
-			GameEngine.getCoreListener().addEventListener(FrameworkConsts.ENTER_FRAME, getEventMethodData("tik"));
+			GameEngine.getCoreListener().addEventListener(Framework.ENTER_FRAME, getEventMethodData("tik"));
 			_timeGivenInSeconds = timeInSeconds;
 			_givenRepeatAmount = timesToRepeat;
 			_running = true;
@@ -38,7 +38,7 @@ public class Timer extends EventDispatcher{
 	}
 	public void stop(){
 		if(_timeGivenInSeconds != 0){
-			GameEngine.getCoreListener().removeEventListener(FrameworkConsts.ENTER_FRAME, getEventMethodData("tik"));
+			GameEngine.getCoreListener().removeEventListener(Framework.ENTER_FRAME, getEventMethodData("tik"));
 			_timesRepeated = 0;
 			_timePassedInSec = 0;
 			_running = false;

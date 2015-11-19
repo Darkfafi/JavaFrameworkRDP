@@ -1,8 +1,8 @@
 package gameEngine.ramses.text;
 
 import gameEngine.ramses.engine.GameEngine;
-import gameEngine.ramses.engine.GameScreen;
 import gameEngine.ramses.entities.DisplayObject;
+import gameEngine.ramses.screen.GameScreen;
 
 import java.awt.Color;
 import java.awt.Font;

@@ -30,13 +30,11 @@ public abstract class WavAudio implements IResources{
 		_baseAudioFolder = baseAudioFolder;
 	}
 	
-	@SuppressWarnings("unused")
 	protected void createAudio(String name, String path) throws UnsupportedAudioFileException, IOException{
 		//AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(WavAudio.class.getResource(_baseAudioFolder + path));
 		_audioList.put(name,(_baseAudioFolder + path));
 	}
 	
-	@SuppressWarnings("unused")
 	protected void createChannel(String name) throws LineUnavailableException{
 		AudioChannel channel = new AudioChannel();
 		_audioChannelsList.put(name, channel);
