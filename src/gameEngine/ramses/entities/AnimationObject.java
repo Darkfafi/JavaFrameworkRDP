@@ -1,6 +1,8 @@
 package gameEngine.ramses.entities;
 
+import gameEngine.ramses.engine.FrameEvents;
 import gameEngine.ramses.engine.GameEngine;
+import gameEngine.ramses.events.Event;
 
 import java.awt.Image;
 import java.util.ArrayList;
@@ -18,6 +20,10 @@ public class AnimationObject extends SpriteObject {
 	private boolean _playingAnimation = false;
 	
 	private Timer _animTimer = new Timer();
+	
+	public AnimationObject(){
+		GameEngine.getCoreListener().addEventListener(FrameEvents.REMOVED_FROM_STAGE, getEventMethodData("removedEntity"));
+	}
 	
 	private void nextFrame(){
 		if(_animationSpriteSheet != null && _animationSpriteSheet.size() > 0){
@@ -126,5 +132,9 @@ public class AnimationObject extends SpriteObject {
 			public void run() {
 				nextFrame();
 		}}, 1000/(int)(GameEngine.getCurrentFrameRate() * animationSpeed));
+	}
+	@SuppressWarnings("unused")
+	private void removedEntity(Event e){
+		correctStopTimer();
 	}
 }

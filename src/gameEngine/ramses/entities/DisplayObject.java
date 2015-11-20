@@ -8,7 +8,7 @@ import gameEngine.ramses.utils.math.Vector2D;
 
 public class DisplayObject extends EventDispatcher {
 	
-	protected DisplayObjectContainer parentObject;
+	protected DisplayObjectContainer parentObject = null;
 	
 	public int x = 0;
 	public int y = 0;
@@ -171,5 +171,11 @@ public class DisplayObject extends EventDispatcher {
 	
 	public DisplayObjectContainer getParent(){
 		return parentObject;
+	}
+	public void destroy(){
+		this.destroyAllListenersAdded();
+		if(this.parentObject != null){
+			this.parentObject.removeChild(this);
+		}
 	}
 }

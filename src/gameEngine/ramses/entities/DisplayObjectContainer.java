@@ -87,4 +87,14 @@ public class DisplayObjectContainer extends DisplayObject {
 		}
 		return result;
 	}
+	@Override
+	public void destroy(){
+		DisplayObject child;
+		for(int i = childerenObjects.size() - 1; i >= 0; i--){
+			child = childerenObjects.get(i);
+			child.destroy();
+			child = null;
+		}
+		super.destroy();
+	}
 }

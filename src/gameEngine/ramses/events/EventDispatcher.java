@@ -10,12 +10,15 @@ public abstract class EventDispatcher {
 	
 	// een lijst van alle listeners die dit object heeft aangemaakt op andere objecten. (IDEE)
 	private ArrayList<ListenerItem> _allListeners = new ArrayList<ListenerItem>();
+	private ArrayList<ListenerItem> _allListenersListeningTo = new ArrayList<ListenerItem>();
 	
  	private EventDispatcher _parentListener = GameEngine.getCoreListener();
  	
 	public void addEventListener(String type, EventMethodData methodData){
-		
-		_allListeners.add(new ListenerItem(type, methodData));
+		methodData.objectAddedTo = this;
+		ListenerItem item = new ListenerItem(type, methodData);
+		_allListeners.add(item);
+		methodData.getMethodHolder()._allListenersListeningTo.add(item);
 	}
 	
 	public void dispatchEvent(Event event){
@@ -40,6 +43,7 @@ public abstract class EventDispatcher {
 				currentItem = _allListeners.get(i);
 				if(currentItem.getType().equals(type) && currentItem.getMethodData().getMethod().equals(methodData.getMethod())){
 					_allListeners.remove(currentItem);
+					methodData.getMethodHolder()._allListenersListeningTo.remove(currentItem);
 					break;
 				}
 			}
@@ -72,8 +76,7 @@ public abstract class EventDispatcher {
 		Class currentClass = this.getClass();
 		while(currentClass != Object.class && mthd == null){
 			try {
-				mthd = currentClass.getDeclaredMethod(eventMethodName,Event.class);
-				mthd.setAccessible(true);
+				mthd = currentClass.getDeclaredMethod(eventMethodName,Event.class);	
 			} catch (NoSuchMethodException | SecurityException e) {
 				currentClass = currentClass.getSuperclass();
 				if(currentClass == Object.class){
@@ -81,13 +84,18 @@ public abstract class EventDispatcher {
 				}
 			}
 		}
+		mthd.setAccessible(true);
 		return new EventMethodData(mthd,this);
 	}
 	
-	public void destroyAllListeners(){
-		if(_allListeners.size() > 0){
-			for(int i = _allListeners.size() - 1; i >= 0; i--){
-				_allListeners.remove(_allListeners.get(i));
+	public void destroyAllListenersAdded(){
+		ListenerItem currItem;
+		EventDispatcher objectAddedTo;
+		if(_allListenersListeningTo.size() > 0){
+			for(int i = _allListenersListeningTo.size() - 1; i >= 0; i--){
+				currItem = _allListenersListeningTo.get(i);
+				objectAddedTo = currItem.getMethodData().objectAddedTo;
+				objectAddedTo.removeEventListener(currItem.getType(), currItem.getMethodData());
 			}
 		}
 	}

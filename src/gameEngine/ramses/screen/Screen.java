@@ -49,12 +49,7 @@ public abstract class Screen extends DisplayObjectContainer implements IScreen{
 	}
 	public void removeScreenBuildDown(){
 		_removing = true;
-		DisplayObject currentChild;
-		for(int i = this.childerenObjects.size() - 1; i >= 0; i--){
-			currentChild = childerenObjects.get(i);
-			this.removeChild(currentChild,true);
-			currentChild = null;
-		}
+		this.destroy();
 		_removing = false;
 		this.screenRemoved();
 	}
