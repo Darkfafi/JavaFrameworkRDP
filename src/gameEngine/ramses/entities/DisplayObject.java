@@ -174,6 +174,7 @@ public class DisplayObject extends EventDispatcher {
 	}
 	public void destroy(){
 		this.destroyAllListenersAdded();
+		this.destroyAllListeners();
 		if(this.parentObject != null){
 			this.parentObject.removeChild(this);
 		}

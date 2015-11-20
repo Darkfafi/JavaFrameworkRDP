@@ -88,6 +88,12 @@ public abstract class EventDispatcher {
 		return new EventMethodData(mthd,this);
 	}
 	
+	public void destroyAllListeners(){
+		for(int i = _allListeners.size() - 1; i >= 0; i--){
+			this.removeEventListener(_allListeners.get(i).getType(), _allListeners.get(i).getMethodData());
+		}
+	}
+	
 	public void destroyAllListenersAdded(){
 		ListenerItem currItem;
 		EventDispatcher objectAddedTo;

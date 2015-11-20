@@ -3,7 +3,6 @@ package gameEngine.ramses.screen;
 import gameEngine.ramses.engine.FrameEvents;
 import gameEngine.ramses.engine.FrameNames;
 import gameEngine.ramses.engine.GameEngine;
-import gameEngine.ramses.entities.DisplayObject;
 import gameEngine.ramses.entities.DisplayObjectContainer;
 import gameEngine.ramses.events.Event;
 

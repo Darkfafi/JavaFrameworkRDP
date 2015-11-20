@@ -3,7 +3,7 @@ package gameEngine.ramses.events;
 public class ListenerItem {
 	private String _typeItem;
 	private EventMethodData _methodData;
-	private EventDispatcher _objectListenedTo;	
+	
 	public ListenerItem(String type, EventMethodData methodData){
 		_typeItem = type;
 		_methodData = methodData;
