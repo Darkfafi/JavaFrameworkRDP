@@ -38,7 +38,6 @@ public class DisplayObject extends EventDispatcher {
 		yPosStart = this.getWorldPositionY() + pivotPositionRevY;
 	}
 	
-	
 	public boolean hitTestObject(DisplayObject other){
 		
 		boolean result = true;

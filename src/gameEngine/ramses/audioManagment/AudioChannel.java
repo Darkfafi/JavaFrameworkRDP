@@ -1,6 +1,6 @@
 package gameEngine.ramses.audioManagment;
 
-import gameEngine.ramses.engine.Framework;
+import gameEngine.ramses.engine.FrameEvents;
 import gameEngine.ramses.engine.GameEngine;
 import gameEngine.ramses.events.Event;
 import gameEngine.ramses.events.EventDispatcher;
@@ -23,7 +23,7 @@ public class AudioChannel extends EventDispatcher {
 	private ArrayList<ClipInfo> _currentAudioClips = new ArrayList<ClipInfo>();
 	
 	public AudioChannel(){
-		GameEngine.getCoreListener().addEventListener(Framework.ENTER_SECOND, getEventMethodData("checkSounds"));
+		GameEngine.getCoreListener().addEventListener(FrameEvents.ENTER_SECOND, getEventMethodData("checkSounds"));
 	}
 	
 	@SuppressWarnings("unused")

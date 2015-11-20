@@ -1,6 +1,6 @@
 package gameEngine.ramses.entities;
 
-import gameEngine.ramses.engine.Framework;
+import gameEngine.ramses.engine.FrameEvents;
 import gameEngine.ramses.events.Event;
 import gameEngine.ramses.screen.Screen;
 
@@ -30,18 +30,31 @@ public class DisplayObjectContainer extends DisplayObject {
 				addChild(displayObject);
 			}
 			displayObject.setParentListener(this);
-			displayObject.dispatchEvent(new Event(Framework.ADDED_TO_STAGE,true));
+			displayObject.dispatchEvent(new Event(FrameEvents.ADDED_TO_STAGE,true));
 		}else{
 			System.err.println("Cannot add DisplayObject to itself");
 		}
 	}
 	
 	public void removeChild(DisplayObject displayObject){
+		removeChild(displayObject,false);
+	}
+	
+	public void removeChild(DisplayObject displayObject, boolean removeChilderen){
 		
 		int index = childerenObjects.indexOf(displayObject);
 		if(index != -1){
 			displayObject.parentObject = null;
 			childerenObjects.remove(index);
+			if(removeChilderen){
+				if(displayObject instanceof DisplayObjectContainer){
+					DisplayObjectContainer conDisp = (DisplayObjectContainer)displayObject;
+					for(int i = conDisp.childerenObjects.size() - 1; i >= 0; i--){
+						conDisp.removeChild(conDisp.childerenObjects.get(i),true);
+					}
+				}
+			}
+			displayObject.dispatchEvent(new Event(FrameEvents.REMOVED_FROM_STAGE,true));
 		}else{
 			System.err.println("DisplayObject does not contain object: " + displayObject.toString());
 		}

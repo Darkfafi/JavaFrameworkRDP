@@ -1,6 +1,6 @@
 package gameEngine.ramses.engine;
 
-public class Framework {
+public class FrameEvents {
 	
 	//Frame events
 	public static final String ENTER_FRAME = "EnterFrameEvent";
@@ -25,6 +25,6 @@ public class Framework {
 	public static final String KEY_RELEASED = "KeyReleasedEvent";
 	public static final String KEY_TYPED = "KeyTypedEvent";
 	
-	//Global Names
-	public static final String MAIN_CAMERA = "MainCamera";
+	//Screen Events 
+	public static final String SWITCH_SCREEN = "SwitchScreenEvent";
 }

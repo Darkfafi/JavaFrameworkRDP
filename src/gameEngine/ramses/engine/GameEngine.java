@@ -6,6 +6,7 @@ import gameEngine.ramses.controlls.keyboard.KeyboardManager;
 import gameEngine.ramses.controlls.mouse.MouseManager;
 import gameEngine.ramses.events.CoreListener;
 import gameEngine.ramses.screen.Screen;
+import gameEngine.ramses.screen.ScreenSwitcher;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -38,6 +39,7 @@ public class GameEngine implements Runnable {
 	private KeyboardManager _keyboardManager;
 	private MouseManager _mouseManager;
 	
+	private static ScreenSwitcher _screenSwitcher;
 	private Screen _currentScreen;
 	private static Screen _currentGameScreen;
 	
@@ -58,7 +60,7 @@ public class GameEngine implements Runnable {
 		
 		loadAssets();
 		loadAudio();
-		
+		_screenSwitcher = new ScreenSwitcher(this);
 		currentFrameRate = frameRate;
 		
 		_image = new BufferedImage(_canvas.getWidth(),_canvas.getHeight(),BufferedImage.TYPE_INT_RGB);
@@ -170,7 +172,7 @@ public class GameEngine implements Runnable {
 			if(System.currentTimeMillis() - lastTimer >= 1000){
 				lastTimer = System.currentTimeMillis();
 				//System.out.println(ticks + " , " + frames);
-				if(_currentScreen != null){
+				if(_currentScreen != null && !_currentScreen.isBeingRemoved()){
 					_currentScreen.secUpdate();
 				}
 				currentFrameRate = ticks;
@@ -181,7 +183,7 @@ public class GameEngine implements Runnable {
 	}
 	
 	private void tick(){
-		if(_currentScreen != null){
+		if(_currentScreen != null && !_currentScreen.isBeingRemoved()){
 			_currentScreen.update();
 		}
 	}
@@ -202,7 +204,7 @@ public class GameEngine implements Runnable {
 		
 		g.drawImage(_image, 0, 0, _canvas.getWidth(),_canvas.getHeight(),null);
 		
-		if(_currentScreen != null){
+		if(_currentScreen != null && !_currentScreen.isBeingRemoved()){
 			_currentScreen.renderScreen(g);
 		}
 		
@@ -213,6 +215,7 @@ public class GameEngine implements Runnable {
 	public void setScreen(Screen screen){
 		if(_currentScreen != null){
 			_currentScreen.removeScreenBuildDown();
+			_currentScreen = null;
 		}
 		_currentScreen = screen;
 		_currentScreen.setScreenBuildUp();
@@ -245,6 +248,9 @@ public class GameEngine implements Runnable {
 	}
 	public static WavAudio getAudio(){
 		return _audio;
+	}
+	public static ScreenSwitcher getScreenSwitcher(){
+		return _screenSwitcher;
 	}
 	public static Graphics2D getGraphics2D(){
 		return _graphics;

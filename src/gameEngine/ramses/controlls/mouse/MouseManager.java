@@ -1,6 +1,6 @@
 package gameEngine.ramses.controlls.mouse;
 
-import gameEngine.ramses.engine.Framework;
+import gameEngine.ramses.engine.FrameEvents;
 import gameEngine.ramses.events.EventDispatcher;
 
 import java.awt.event.MouseEvent;
@@ -12,32 +12,32 @@ public class MouseManager extends EventDispatcher implements MouseListener, Mous
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		updateMouseLocation(e);
-		this.dispatchEvent(new EventMouse(Framework.MOUSE_DRAGGED,e));
+		this.dispatchEvent(new EventMouse(FrameEvents.MOUSE_DRAGGED,e));
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		updateMouseLocation(e);
-		this.dispatchEvent(new EventMouse(Framework.MOUSE_MOVED,e));
+		this.dispatchEvent(new EventMouse(FrameEvents.MOUSE_MOVED,e));
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		this.dispatchEvent(new EventMouse(Framework.MOUSE_CLICKED,e));
+		this.dispatchEvent(new EventMouse(FrameEvents.MOUSE_CLICKED,e));
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		this.dispatchEvent(new EventMouse(Framework.MOUSE_ENTERED,e));
+		this.dispatchEvent(new EventMouse(FrameEvents.MOUSE_ENTERED,e));
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
-		this.dispatchEvent(new EventMouse(Framework.MOUSE_EXITED,e));
+		this.dispatchEvent(new EventMouse(FrameEvents.MOUSE_EXITED,e));
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		this.dispatchEvent(new EventMouse(Framework.MOUSE_PRESSED,e));
+		this.dispatchEvent(new EventMouse(FrameEvents.MOUSE_PRESSED,e));
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		this.dispatchEvent(new EventMouse(Framework.MOUSE_RELEASED,e));
+		this.dispatchEvent(new EventMouse(FrameEvents.MOUSE_RELEASED,e));
 	}
 	private void updateMouseLocation(MouseEvent e){
 		Mouse.setX(e.getX(), this);

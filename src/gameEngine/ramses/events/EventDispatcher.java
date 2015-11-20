@@ -65,13 +65,21 @@ public abstract class EventDispatcher {
 		return _allListeners;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public EventMethodData getEventMethodData(String eventMethodName){
 		Method mthd = null;
-		try {
-			mthd = this.getClass().getDeclaredMethod(eventMethodName,Event.class);
-			mthd.setAccessible(true);
-		} catch (NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
+		@SuppressWarnings("rawtypes")
+		Class currentClass = this.getClass();
+		while(currentClass != Object.class && mthd == null){
+			try {
+				mthd = currentClass.getDeclaredMethod(eventMethodName,Event.class);
+				mthd.setAccessible(true);
+			} catch (NoSuchMethodException | SecurityException e) {
+				currentClass = currentClass.getSuperclass();
+				if(currentClass == Object.class){
+					e.printStackTrace();
+				}
+			}
 		}
 		return new EventMethodData(mthd,this);
 	}
