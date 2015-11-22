@@ -25,8 +25,9 @@ public class EventQueueRoom {
 		}
 	}
 	
-	private static void callMethodsInListOfEvent(ArrayList<ListenerItem> list, Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private static void callMethodsInListOfEvent(ArrayList<ListenerItem> listToLoop, Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		ListenerItem currentItem;
+		ArrayList<ListenerItem> list = listToLoop;
 		if(list.size() > 0){
 			for(int i = list.size() - 1; i >= 0 ; i--){
 				currentItem = list.get(i);

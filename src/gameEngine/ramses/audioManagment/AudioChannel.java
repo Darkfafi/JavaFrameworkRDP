@@ -63,7 +63,7 @@ public class AudioChannel extends EventDispatcher {
 		newClip.start();
 		clipInfo = new ClipInfo(newClip,timesToRepeat,volume);
 		_currentAudioClips.add(clipInfo);
-		System.out.println(_currentAudioClips.size());
+		//System.out.println(_currentAudioClips.size());
 	}
 	
 	public void setVolume(float volume){

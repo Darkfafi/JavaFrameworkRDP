@@ -21,6 +21,11 @@ public class Vector2D {
 	public void normalize(){
 		setLength(1);
 	}
+	public Vector2D normalized(){
+		Vector2D vec = this.clone();
+		vec.normalize();
+		return vec;
+	}
 	
 	public Vector2D clone(){
 		return new Vector2D(_x,_y);
@@ -75,16 +80,19 @@ public class Vector2D {
 	}
 	
 	// Calculators
-	public void add(Vector2D vec){
+	public Vector2D add(Vector2D vec){
 		setX(_x + vec.getX());
 		setY(_y + vec.getY());
+		return this.clone();
 	}
-	public void substract(Vector2D vec){
+	public Vector2D substract(Vector2D vec){
 		setX(_x - vec.getX());
 		setY(_y - vec.getY());
+		return this.clone();
 	}
-	public void multiply(float number){
+	public Vector2D multiply(float number){
 		setX(_x * number);
 		setY(_y * number);
+		return this.clone();
 	}
 }
