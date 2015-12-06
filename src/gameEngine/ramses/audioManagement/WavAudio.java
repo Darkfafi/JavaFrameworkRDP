@@ -56,8 +56,11 @@ public abstract class WavAudio implements IResources{
 			e.printStackTrace();
 		}
 	}
-	public void stopChannel(String nameChannel){
-		_audioChannelsList.get(nameChannel).stop();
+	public void pauseChannel(String nameChannel){
+		_audioChannelsList.get(nameChannel).pause();
+	}
+	public void clearChannel(String nameChannel){
+		_audioChannelsList.get(nameChannel).clear();
 	}
 	public void resumeChannel(String nameChannel){
 		_audioChannelsList.get(nameChannel).resume();

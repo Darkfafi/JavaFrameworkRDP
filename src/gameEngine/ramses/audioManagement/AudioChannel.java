@@ -29,8 +29,7 @@ public class AudioChannel extends EventDispatcher {
 			currentClip = _currentAudioClips.get(i);
 			if(!currentClip.getClip().isRunning() && currentClip.getClip().getFramePosition() >= currentClip.getClip().getFrameLength()){
 				if(currentClip.timesRepeated >= currentClip.getRepeatAmount()){
-				  currentClip.getClip().close();
-				  _currentAudioClips.remove(i);
+					removeClip(currentClip);
 				}else{
 					currentClip.timesRepeated ++;
 					currentClip.getClip().setFramePosition(0);
@@ -66,7 +65,7 @@ public class AudioChannel extends EventDispatcher {
 		audioController.setValue((float)(Math.log((volume *(_channelVolume / 100)) / 100d) / Math.log(10.0) * 20.0));
 	}
 	
-	public void stop(){
+	public void pause(){
 		for(int i = _currentAudioClips.size() - 1; i >= 0; i--){
 			_currentAudioClips.get(i).getClip().stop();
 		}
@@ -75,5 +74,14 @@ public class AudioChannel extends EventDispatcher {
 		for(int i = _currentAudioClips.size() - 1; i >= 0; i--){
 			_currentAudioClips.get(i).getClip().start();
 		}
+	}
+	public void clear(){
+		for(int i = _currentAudioClips.size() - 1; i >= 0; i--){
+			removeClip(_currentAudioClips.get(i));
+		}
+	}
+	public void removeClip(ClipInfo clip){
+		clip.getClip().close();
+		_currentAudioClips.remove(clip);	
 	}
 }
