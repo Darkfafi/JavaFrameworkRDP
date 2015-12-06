@@ -1,7 +1,7 @@
 package gameEngine.ramses.engine;
 
 import gameEngine.ramses.assetsManagement.Assets;
-import gameEngine.ramses.audioManagment.WavAudio;
+import gameEngine.ramses.audioManagement.WavAudio;
 import gameEngine.ramses.controlls.keyboard.KeyboardManager;
 import gameEngine.ramses.controlls.mouse.MouseManager;
 import gameEngine.ramses.events.CoreListener;

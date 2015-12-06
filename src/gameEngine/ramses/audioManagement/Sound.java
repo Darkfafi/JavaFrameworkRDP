@@ -26,7 +26,10 @@ public class Sound {
 			_audioBytes = new byte[_audioSize];
 			_audioInfo = new DataLine.Info(Clip.class, _audioFormat, _audioSize);
 			_audioInputStream.read(_audioBytes, 0, _audioSize);
-		} catch (IOException | UnsupportedAudioFileException e) {
+			Clip clip = getAudioClip();
+			clip.start();
+			clip.stop();
+		} catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -37,8 +40,4 @@ public class Sound {
 		clip.open(_audioFormat,_audioBytes,0,_audioSize);
 		return clip;
 	}
-	/*
-	public ByteArrayOutputStream getCloneBytes(){
-		return _cloneBytes;
-	}*/
 }

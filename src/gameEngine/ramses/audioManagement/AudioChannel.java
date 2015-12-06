@@ -19,7 +19,7 @@ public class AudioChannel extends EventDispatcher {
 	private ArrayList<ClipInfo> _currentAudioClips = new ArrayList<ClipInfo>();
 	
 	public AudioChannel(){
-		GameEngine.getCoreListener().addEventListener(FrameEvents.ENTER_SECOND, getEventMethodData("checkSounds"));
+		GameEngine.getCoreListener().addEventListener(FrameEvents.ENTER_FRAME, getEventMethodData("checkSounds"));
 	}
 	
 	@SuppressWarnings("unused")
