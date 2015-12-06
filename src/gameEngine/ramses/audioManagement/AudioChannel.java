@@ -27,7 +27,7 @@ public class AudioChannel extends EventDispatcher {
 		ClipInfo currentClip;
 		for(int i = _currentAudioClips.size() - 1; i >= 0; i--){
 			currentClip = _currentAudioClips.get(i);
-			if(!currentClip.getClip().isRunning()){
+			if(!currentClip.getClip().isRunning() && currentClip.getClip().getFramePosition() >= currentClip.getClip().getFrameLength()){
 				if(currentClip.timesRepeated >= currentClip.getRepeatAmount()){
 				  currentClip.getClip().close();
 				  _currentAudioClips.remove(i);

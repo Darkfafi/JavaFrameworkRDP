@@ -26,10 +26,7 @@ public class Sound {
 			_audioBytes = new byte[_audioSize];
 			_audioInfo = new DataLine.Info(Clip.class, _audioFormat, _audioSize);
 			_audioInputStream.read(_audioBytes, 0, _audioSize);
-			Clip clip = getAudioClip();
-			clip.start();
-			clip.stop();
-		} catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+		} catch (IOException | UnsupportedAudioFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
